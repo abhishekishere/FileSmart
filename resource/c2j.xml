@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cobol>
+	<IDENTIFICATION>
+		<text>** Division 1</text>
+	</IDENTIFICATION>
+	<PROGRAM-ID>
+		<text>public class 1 {</text>
+		<path>1</path>
+		<text></text>
+	</PROGRAM-ID>
+	<AUTHOR>
+		<text>String author = </text>
+		<path>1</path>
+		<text>;</text>
+	</AUTHOR>
+	<INSTALLATION>
+		<text>String installation = </text>
+		<path>1</path>
+		<text>;</text>
+	</INSTALLATION>
+	<ENVIRONMENT>
+		<text>** Environment Division</text>
+	</ENVIRONMENT>
+	<CONFIGURATION>
+		<text>** Configuration Section</text>		
+	</CONFIGURATION>
+	<SOURCE-COMPUTER>
+		<text>String source_computer = </text>
+		<path>1</path>
+		<text>;</text>
+	</SOURCE-COMPUTER>
+	<OBJECT-COMPUTER>
+		<text>String object_computer = </text>
+		<path>1</path>
+		<text>;</text>
+	</OBJECT-COMPUTER>
+	<INPUT-OUTPUT>
+		<text>*** input-output section</text>
+	</INPUT-OUTPUT>
+	<FILE-CONTROL>
+		<text>File </text>
+		<path>1</path>
+		<text>;</text>
+	</FILE-CONTROL>
+	<COPY>
+		<text><path>//3//1</path></text>
+	</COPY>
+	<SELECT>
+		<text>1</text>
+	</SELECT>
+	<DATA>
+		<text>** Data Division</text>
+	</DATA>
+	<FILE>
+		<text>** File Section </text>
+	</FILE>
+	<FD>
+		<text>1 = new File("//11//14")</text> 
+	</FD>
+	<01>
+  		<text>String 1;  </text>
+  		<path></path>
+   	</01>
+  	<03>
+  		<path>.*(PIC).*</path>
+  		<text>+1</text>
+  		<path></path>
+	
+  	</03>
+  	<05>
+  		 <path>.*(PIC).*</path>
+  		 <text>+1</text>
+  		 <path></path>
+  	</05>
+  	<07>
+  		<path>.*(PIC).*</path>
+  		<path></path>
+  	</07>
+  	<PIC>
+  		<path>.*(X)[(].*[)].*</path>
+ 		<path>.*(9)[(].*[)].*</path>
+  	</PIC>
+  	<X>
+  		<text>char 1</text>
+  		<path>.*([(].*[)]).*</path>
+  		<path>.*(VALUE).*</path>
+  		<text>;</text>
+  		
+  	</X>
+  	<9>
+  		<text>int 1</text>
+  		<path>.*([(].*[)]).*</path>
+  		<path>.*(VALUE).*</path>
+  		<text>;</text>
+  		
+  	</9>
+  	<VALUE>
+  		<text>=</text>
+  		<path>.*VALUE(.*)</path>
+  		
+  	</VALUE>
+  	<05>
+  		<path>.*(X)[(].*[)].*</path>
+  		<path></path>
+  	</05>
+  	<WORKING-STORAGE>
+  		<text>** Working Storage Section</text>
+  		<path></path>
+  	</WORKING-STORAGE>
+  	<VALUE></VALUE>
+	<PROCEDURE>
+		<text>public static void main(String args[]) {</text>
+		<path></path>
+		<text>}</text>
+	</PROCEDURE>	
+	<COPY>
+  		<path>3//1</path>
+  	</COPY>
+  	<OPEN>
+  		<text>import</text>
+  		<text></text>
+  	</OPEN>
+  	<MOVE>
+  		
+  	</MOVE>
+  	<ASSIGN></ASSIGN>
+  	<PROGRAM-ID></PROGRAM-ID>
+  	<VALUE>
+  		<text></text>
+  	</VALUE>
+  	<FD>
+  		<text>CharArrayReader 1</text>
+ 		<copy></copy>
+  	</FD>
+  	<RECORD>
+  	</RECORD>
+  	<LABEL></LABEL>
+  	<VALUE>
+  		<path></path>
+  	</VALUE>
+  	<FILENAME>
+  		<text>try {
+			FileReader fr2 = new FileReader("</text>
+		<text>");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace(2);
+		}</text>
+  	</FILENAME>
+  	<LIBRARY>
+  	
+  	</LIBRARY>
+  	<VOLUME></VOLUME>
+  	<SPACE></SPACE>
+  	
+</cobol>
