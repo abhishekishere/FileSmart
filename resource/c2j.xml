@@ -58,25 +58,25 @@
 	<FD>
 		<text>1 = new File("//11//14")</text> 
 	</FD>
-	<01>
+	<C01>
   		<text>String 1;  </text>
   		<path></path>
-   	</01>
-  	<03>
+   	</C01>
+  	<C03>
   		<path>.*(PIC).*</path>
   		<text>+1</text>
   		<path></path>
 	
-  	</03>
-  	<05>
+  	</C03>
+  	<C05>
   		 <path>.*(PIC).*</path>
   		 <text>+1</text>
   		 <path></path>
-  	</05>
-  	<07>
+  	</C05>
+  	<C07>
   		<path>.*(PIC).*</path>
   		<path></path>
-  	</07>
+  	</C07>
   	<PIC>
   		<path>.*(X)[(].*[)].*</path>
  		<path>.*(9)[(].*[)].*</path>
@@ -88,22 +88,22 @@
   		<text>;</text>
   		
   	</X>
-  	<9>
+  	<C9>
   		<text>int 1</text>
   		<path>.*([(].*[)]).*</path>
   		<path>.*(VALUE).*</path>
   		<text>;</text>
   		
-  	</9>
+  	</C9>
   	<VALUE>
   		<text>=</text>
   		<path>.*VALUE(.*)</path>
   		
   	</VALUE>
-  	<05>
+  	<C05>
   		<path>.*(X)[(].*[)].*</path>
   		<path></path>
-  	</05>
+  	</C05>
   	<WORKING-STORAGE>
   		<text>** Working Storage Section</text>
   		<path></path>
