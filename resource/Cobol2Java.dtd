@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT cobol (COPY|MOVE|OPEN)+> 
+<!ELEMENT cobol (IDENTIFICATION|COPY|MOVE|OPEN)+> 
 <!ELEMENT COPY (path)+>
 <!ELEMENT path (#PCDATA)>
 <!ELEMENT text (#PCDATA)>
+<!ELEMENT IDENTIFICATION (#PCDATA)>

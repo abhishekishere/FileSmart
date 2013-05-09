@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!DOCTYPE cobol SYSTEM "Cobol2Java.dtd" >
 <cobol>
 	<IDENTIFICATION>
-		<text>** Division 1</text>
+		<text>// Division 1</text>
 	</IDENTIFICATION>
 	<PROGRAM-ID>
-		<text>public class 1 {</text>
-		<path>1</path>
-		<text></text>
+		<text>
+	 public class </text>
+		<path></path>
+		<text>{ </text>
+		<path></path>
+		<text>
+		}</text>
 	</PROGRAM-ID>
+	
 	<AUTHOR>
-		<text>String author = </text>
-		<path>1</path>
-		<text>;</text>
+		<text>
+		String author = </text>
+		<path></path>
+		<text> ;</text>
+		<path></path>
 	</AUTHOR>
 	<INSTALLATION>
-		<text>String installation = </text>
+		<text>
+		String installation = </text>
 		<path>1</path>
 		<text>;</text>
 	</INSTALLATION>
