@@ -2,97 +2,114 @@
 <!DOCTYPE cobol SYSTEM "Cobol2Java.dtd" >
 <cobol>
 	<IDENTIFICATION>
-		<text>// Division 1</text>
+		<text>
+		//Identification Division </text>
 	</IDENTIFICATION>
 	<PROGRAM-ID>
 		<text>
 	 public class </text>
-		<path></path>
+		<text></text>
 		<text>{ </text>
-		<path></path>
 		<text>
 		}</text>
 	</PROGRAM-ID>
 	
 	<AUTHOR>
 		<text>
-		String author = </text>
-		<path></path>
-		<text> ;</text>
-		<path></path>
+		String author = "</text>
+		<text></text>
+		<text>" ;</text>
+		
 	</AUTHOR>
 	<INSTALLATION>
 		<text>
-		String installation = </text>
-		<path>1</path>
-		<text>;</text>
+		String installation = "</text>
+		<text></text>
+		<text>";</text>
 	</INSTALLATION>
 	<ENVIRONMENT>
-		<text>** Environment Division</text>
+		<text>
+		// Environment Division</text>
 	</ENVIRONMENT>
 	<CONFIGURATION>
-		<text>** Configuration Section</text>		
+		<text>
+		// Configuration Section</text>		
 	</CONFIGURATION>
 	<SOURCE-COMPUTER>
-		<text>String source_computer = </text>
-		<path>1</path>
+		<text>
+		String source_computer = </text>
+		<text></text>
 		<text>;</text>
 	</SOURCE-COMPUTER>
 	<OBJECT-COMPUTER>
-		<text>String object_computer = </text>
-		<path>1</path>
+		<text>
+		String object_computer = </text>
+		<text></text>
 		<text>;</text>
 	</OBJECT-COMPUTER>
 	<INPUT-OUTPUT>
-		<text>*** input-output section</text>
+		<text>
+		//input-output section</text>
 	</INPUT-OUTPUT>
 	<FILE-CONTROL>
-		<text>File </text>
-		<path>1</path>
-		<text>;</text>
+		<text>
+		//File Control</text>
 	</FILE-CONTROL>
 	<COPY>
-		<text><path>//3//1</path></text>
+		<text>
+		** Copy Command</text>
 	</COPY>
 	<SELECT>
+		<text>
+		File </text>
 		<text>1</text>
+		<path>[\s*[A-Za-z0-9-",/]+\s*]+(ORGANIZATION)[\s*[A-Za-z0-9-",/]+\s*]+</path>
 	</SELECT>
+	<ORGANIZATION>
+		<text>= new File(1);</text>
+	</ORGANIZATION>
 	<DATA>
-		<text>** Data Division</text>
+		<text>
+		// Data Division</text>
 	</DATA>
 	<FILE>
-		<text>** File Section </text>
+		<text>
+		// File Section </text>
 	</FILE>
-	<FD>
-		<text>1 = new File("//11//14")</text> 
-	</FD>
+	
 	<C01>
-  		<text>String 1;  </text>
-  		<path></path>
+  		<text>
+  		String 1;  </text>
+  		
    	</C01>
   	<C03>
   		<path>.*(PIC).*</path>
-  		<text>+1</text>
-  		<path></path>
+  		<text>
+  		String 1</text>
+  		
+  	
 	
   	</C03>
   	<C05>
   		 <path>.*(PIC).*</path>
-  		 <text>+1</text>
-  		 <path></path>
+  		 <text>
+  		 String 1;</text>
+  		 
   	</C05>
   	<C07>
   		<path>.*(PIC).*</path>
-  		<path></path>
+  		<text>
+  		String 1;</text>
+ 
   	</C07>
   	<PIC>
   		<path>.*(X)[(].*[)].*</path>
- 		<path>.*(9)[(].*[)].*</path>
+ 		<path>.*(C9)[(].*[)].*</path>
   	</PIC>
   	<X>
   		<text>char 1</text>
   		<path>.*([(].*[)]).*</path>
-  		<path>.*(VALUE).*</path>
+  		
   		<text>;</text>
   		
   	</X>
@@ -113,21 +130,24 @@
   		<path></path>
   	</C05>
   	<WORKING-STORAGE>
-  		<text>** Working Storage Section</text>
-  		<path></path>
+  		<text>
+  		** Working Storage Section</text>
   	</WORKING-STORAGE>
   	<VALUE></VALUE>
 	<PROCEDURE>
-		<text>public static void main(String args[]) {</text>
-		<path></path>
-		<text>}</text>
+		<text>
+		public static void main(String args[]) {</text>
+		<text></text>
+		<text>
+		}</text>
 	</PROCEDURE>	
 	<COPY>
-  		<path>3//1</path>
+  		<text>* Copy</text>
   	</COPY>
   	<OPEN>
-  		<text>import</text>
-  		<text></text>
+  		<text>
+  		2</text>
+  		<text>Reader.read();</text>
   	</OPEN>
   	<MOVE>
   		
@@ -138,9 +158,13 @@
   		<text></text>
   	</VALUE>
   	<FD>
-  		<text>CharArrayReader 1</text>
- 		<copy></copy>
+  		<text>
+  		CharArrayReader 1Reader</text>
+ 		<path>[\s*[A-Za-z0-9-",/]+\s*]+(FILENAME)[\s*[A-Za-z0-9-",/]+\s*]+</path>
   	</FD>
+  	<FILENAME>
+  		<text>= new CharArrayReader(1);</text>
+  	</FILENAME>
   	<RECORD>
   	</RECORD>
   	<LABEL></LABEL>
@@ -160,5 +184,5 @@
   	</LIBRARY>
   	<VOLUME></VOLUME>
   	<SPACE></SPACE>
-  	
+  	<CMEDIT></CMEDIT>
 </cobol>

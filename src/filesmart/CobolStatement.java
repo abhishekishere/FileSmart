@@ -6,7 +6,7 @@ public class CobolStatement extends Thread {
 
 	String name;
 	String line;
-
+	
 	HashSet<CobolTag> hierarchy;
 
 	public CobolStatement() {
@@ -18,6 +18,7 @@ public class CobolStatement extends Thread {
 		super(cobolTag);
 		this.name = name;
 		this.line = line;
+		
 
 	}
 
