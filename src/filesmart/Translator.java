@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -13,11 +15,11 @@ import org.w3c.dom.Node;
 public class Translator {
 	static Document doc;
 	static Node command;
-	static final String xml = "C:\\Users\\abhishekba\\Workspaces\\MyEclipse 8.6\\FileSmart\\resource\\c2j.xml";
+	static final String xml = "C:\\Users\\abhishekba\\git\\FileSmart\\resource\\c2j.xml";
 	static final String ALPHANUMNERIC_WORD = "\\s*([A-Za-z0-9-]+)\\s*";
 	
 	static final String ALPHANUMERIC_WORD_ENDING_IN_ANYTHING = "\\s*([a-zA-Z0-9-]*)\\s*.*";
-	static final String SYMBOL = "[A-Za-z0-9-\",/()]+";
+	static final String SYMBOL = "[A-Za-z0-9-\",/()@#:*=]+";
 	static final String WORD = "\\s*"+SYMBOL+"\\s*";
 	static final String SENTENCE = "["+ WORD+"]+";
 	static final String ALNUM_STARTING_WITH_NEW_LINE = "\\n*"+ALPHANUMERIC_WORD_ENDING_IN_ANYTHING;
@@ -27,6 +29,7 @@ public class Translator {
 	static {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		try {
+			
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			File fXmlFile = new File(xml);
 			doc = dBuilder.parse(fXmlFile);
@@ -49,14 +52,10 @@ public class Translator {
 	}
 
 	public static void main(String[] args) {
-		String line = ""+
-     "SELECT MTRL"+
-         "ASSIGN TO \"MTRL\" \"DISK\" NODISPLAY"+
-         "ORGANIZATION IS SEQUENTIAL"+
-         "ACCESS MODE  IS DYNAMIC ";
+		String line = "GO TO 10-READ-MTRL";
 		//command = doc.getElementsByTagName("IDENTIFICATION").item(0).getChildNodes().item(3);
 		//System.out.println(command);
-		String group = match(ALPHANUMERIC_WORD_ENDING_IN_ANYTHING, line);
+		String group = match(WORD+WORD+NUMBER+"-"+"("+SYMBOL+")" ,line);
 		System.out.println(group);
 		
 	}

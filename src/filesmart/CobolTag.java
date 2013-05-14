@@ -2,8 +2,9 @@ package filesmart;
 
 import static filesmart.Translator.*;
 
-
 import java.util.StringTokenizer;
+
+import javax.xml.parsers.SAXParser;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,34 +22,30 @@ public class CobolTag implements Runnable {
 
 	static {
 		smartFile = new FileSmartMavenMain(
-				"C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE",
+				"C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE_COPY.cob",
 				"\\.");
 	}
 
 	public CobolTag() {
-		line = "";
-		while (line != null) {
-			line = smartFile.readLine();
-			name = match(OPERAND,line);
-			name = match(ALPHANUMERIC_WORD_ENDING_IN_ANYTHING, line);
+		for (line = smartFile.readLine(); line != null; line = smartFile
+				.readLine()) {
+
+			name = match("(" + OPERAND + ")" + SENTENCE, line);
+			if (name != null) {
+				name = "C" + name.trim();
+			}
+
+			if (name == null) {
+				name = match(ALPHANUMERIC_WORD_ENDING_IN_ANYTHING, line);
+				name = match("(" + WORD + ")" + WORD, line);
+			}
 			if (name == null) {
 				name = match("(" + WORD + ")" + SENTENCE, line);
 			}
-			if (name == null) {
-				name = "CMEDIT";
-			}
-			command = doc.getElementsByTagName(name.trim()).item(0);
+
+			if(name != null) command = doc.getElementsByTagName(name.trim()).item(0);
 			if (command != null) {
-				Element comm = (Element) command;
-				syntax = comm.getChildNodes();
-				CobolStatement cs1 = new CobolStatement(this, name, line);
-				cs1.start();
-				try {
-					cs1.join();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				newThread();
 			}
 		}
 	}
@@ -56,7 +53,8 @@ public class CobolTag implements Runnable {
 	// Shared Code
 	@Override
 	public void run() {
-		int freewill = 1;
+		
+		
 		for (int i = 0; i < syntax.getLength(); i++) {
 
 			Node type = syntax.item(i);
@@ -71,28 +69,22 @@ public class CobolTag implements Runnable {
 				slowWrite(name);
 				text = text + name;
 			}
-			if (type.getNodeName() == "path" && freewill == 1) {
-				freewill = 0;
+			if (type.getNodeName() == "path" ) {
+				
 				command = null;
+				try {
 				name = match(value, line);
-
-				command = doc.getElementsByTagName(name).item(0);
+				}catch (Exception e ) {
+					continue;
+				}
+				if (name != null ) {command = doc.getElementsByTagName(name).item(0);
 				if (command != null) {
-					Element comm = (Element) command;
-					syntax = comm.getChildNodes();
-					CobolStatement cs1 = new CobolStatement(this, name, line);
-					cs1.start();
-					try {
-						cs1.join();
-
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					newThread();
 				} else {
 
 					slowWrite(name);
 					text = text + name;
-				}
+				}}
 
 			}
 
@@ -101,6 +93,21 @@ public class CobolTag implements Runnable {
 				text = text + value;
 			}
 		}
+	}
+
+	public void newThread() {
+		Element comm = (Element) command;
+		
+		syntax = comm.getChildNodes();
+		CobolStatement cs1 = new CobolStatement(this, name, line);
+		cs1.start();
+		try {
+			cs1.join();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void slowWrite(String text) {
@@ -117,7 +124,7 @@ public class CobolTag implements Runnable {
 			for (int i = 0; i <= j; i++) {
 				token = lineArray1.nextToken();
 			}
-			text=text.replaceAll(Integer.toString(j), token);
+			text = text.replaceAll(Integer.toString(j), token);
 		}
 		System.out.print(text);
 	}

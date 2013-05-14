@@ -16,9 +16,9 @@ public class SayHello {
 	                               args) {
 		char ab[];
 		int a[];
-		char a[]={'1','2','5'} , b[]={'A','V','f'};
-		ab = a;
-		System.out.println(ab);
+		//char a[]={'1','2','5'} , b[]={'A','V','f'};
+		//ab = a
+		//System.out.println(ab);
 		String ab1 = "Abhishek"; 
 		CharArrayReader car;
 		try {
