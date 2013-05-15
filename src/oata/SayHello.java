@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.Reader;
 
 import oata.HelloWorld.ABC;
+import oata.HelloWorld.ABC.DEF;
 
 public class SayHello {
 
@@ -31,6 +32,7 @@ public class SayHello {
 		HelloWorld obj = new HelloWorld();
 		ABC nn = new ABC();
 		nn.sayHello(ab1);
+		DEF aa= new DEF();
 System.out.println();
 	}
 

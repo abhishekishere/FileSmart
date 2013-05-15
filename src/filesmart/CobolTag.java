@@ -5,6 +5,7 @@ import static filesmart.Translator.*;
 import java.util.StringTokenizer;
 
 import javax.xml.parsers.SAXParser;
+import javax.xml.soap.Text;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,11 +19,12 @@ public class CobolTag implements Runnable {
 	String line; // full cobol statement
 	String group; // matching group
 	NodeList syntax;
+	String value = "";
 	public static FileSmartMavenMain smartFile;
 
 	static {
 		smartFile = new FileSmartMavenMain(
-				"C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE_COPY.cob",
+				"C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE_copy.cob",
 				"\\.");
 	}
 
@@ -30,74 +32,115 @@ public class CobolTag implements Runnable {
 		for (line = smartFile.readLine(); line != null; line = smartFile
 				.readLine()) {
 
-			name = match("(" + OPERAND + ")" + SENTENCE, line);
-			if (name != null) {
-				name = "C" + name.trim();
-			}
+			tight2looseMatching();
 
-			if (name == null) {
-				name = match(ALPHANUMERIC_WORD_ENDING_IN_ANYTHING, line);
-				name = match("(" + WORD + ")" + WORD, line);
-			}
-			if (name == null) {
-				name = match("(" + WORD + ")" + SENTENCE, line);
-			}
-
-			if(name != null) command = doc.getElementsByTagName(name.trim()).item(0);
+			if (name != null)
+				command = doc.getElementsByTagName(name.trim()).item(0);
 			if (command != null) {
 				newThread();
 			}
 		}
 	}
 
+	public void tight2looseMatching() {
+		// First I check if it is a case
+		name = match(OPERAND+"-"+"("+SYMBOL+")" ,line);
+		if(name != null) {
+			name = "case "+name+":" ;
+			return;
+		}
+		
+		if(name != null) return;
+		name = match("(" + OPERAND + ")" + SENTENCE, line);
+		
+		if (name != null) {
+			name = "C" + name.trim();
+			if(name != null) return;
+		}
+		// checking for single word command like "Program-Id"
+		if(name == null) {
+			name = match("("+WORD+")",line);
+			
+		}
+		if(name != null) return;
+		// Checking for multiple word command
+		if(name== null) {
+			name = match("("+WORD+")"+SENTENCE,line); return;
+		}
+		if (name == null) {
+			name = match(ALPHANUMERIC_WORD_ENDING_IN_ANYTHING, line);
+			name = match("(" + WORD + ")" + WORD, line);
+			if(name != null) return;
+		}
+		if (name == null) {
+			name = match("(" + WORD + ")" + SENTENCE, line);
+			if(name != null) return;
+		}
+		name =null;
+	}
+
 	// Shared Code
 	@Override
 	public void run() {
-		
-		
+
 		for (int i = 0; i < syntax.getLength(); i++) {
 
 			Node type = syntax.item(i);
 
-			String value = type.getTextContent();
+			value = type.getTextContent();
 			if (value == "") {
 				line = smartFile.readLine();
-				name = match(ALPHANUMNERIC_WORD, line);
-				if (name == null) {
-					name = match("(" + SENTENCE + ")", line);
-				}
-				slowWrite(name);
-				text = text + name;
+				
+				/*
+				 * name = match(ALPHANUMNERIC_WORD, line); if (name == null) {
+				 * name = match("(" + SENTENCE + ")", line); } slowWrite(name);
+				 * text = text + name;
+				 */
 			}
-			if (type.getNodeName() == "path" ) {
+			if (type.getNodeName() == "path") {
 				
 				command = null;
-				try {
-				name = match(value, line);
-				}catch (Exception e ) {
-					continue;
+				if(value != null) {
+					name = match(value,line);
 				}
-				if (name != null ) {command = doc.getElementsByTagName(name).item(0);
-				if (command != null) {
-					newThread();
-				} else {
+				
+				if (name != null) {
+					command = doc.getElementsByTagName(name.trim()).item(0);
+					if (command != null) {
+						NodeList syntax_bkup = syntax;
+						int i_bkup = i;
+						newThread();
+						syntax = syntax_bkup;
+						i = i_bkup;
+					} else {
 
-					slowWrite(name);
-					text = text + name;
-				}}
+						slowWriteAsItIs(name);
+						text = text + name;
+					}
+				}
 
 			}
 
 			if (type.getNodeName() == "text") {
+				if(value=="") {
+					slowWrite(line);
+					text = text + line;
+				}
 				slowWrite(value);
 				text = text + value;
 			}
 		}
 	}
 
+	private void slowWriteAsItIs(String text1) {
+		// TODO Auto-generated method stub
+		text = text + text1;
+		System.out.print(text1);
+	}
+
 	public void newThread() {
 		Element comm = (Element) command;
-		
+
 		syntax = comm.getChildNodes();
 		CobolStatement cs1 = new CobolStatement(this, name, line);
 		cs1.start();
@@ -107,7 +150,7 @@ public class CobolTag implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void slowWrite(String text) {

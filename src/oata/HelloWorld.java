@@ -2,9 +2,13 @@ package oata;
 
 public class HelloWorld {
 	public static class ABC {
+		public static class DEF {
+			
+		}
 	public static void sayHello(String name) {
 		// TODO Auto-generated method stub
 		System.out.println("Hello!"+name);
+		
 	}
 	
 	}

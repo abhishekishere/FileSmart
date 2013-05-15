@@ -3,14 +3,17 @@
 <cobol>
 	<IDENTIFICATION>
 		<text>
-		//Identification Division </text>
+		/*		------------------------------------------- 
+		 *			IDENTIFICATION DIVISION
+		 *		-------------------------------------------
+		 */</text>
 	</IDENTIFICATION>
 	<PROGRAM-ID>
 		<text>
 	 public class </text>
 		<text></text>
-		<text>{ </text>
-		<text>
+		<text> { </text>
+		// Insert text here<text>
 		}</text>
 	</PROGRAM-ID>
 	
@@ -19,7 +22,6 @@
 		String author = "</text>
 		<text></text>
 		<text>" ;</text>
-		
 	</AUTHOR>
 	<INSTALLATION>
 		<text>
@@ -29,84 +31,101 @@
 	</INSTALLATION>
 	<ENVIRONMENT>
 		<text>
-		// Environment Division</text>
+		/*		------------------------------------------ 
+		 *			ENVIRONMENT DIVISION
+		 *		------------------------------------------
+		 */</text>
 	</ENVIRONMENT>
 	<CONFIGURATION>
 		<text>
-		// Configuration Section</text>		
+					/* Configuration Section */
+		</text>		
 	</CONFIGURATION>
 	<SOURCE-COMPUTER>
 		<text>
-		String source_computer = </text>
+			String source_computer = </text>
 		<text></text>
 		<text>;</text>
 	</SOURCE-COMPUTER>
 	<OBJECT-COMPUTER>
 		<text>
-		String object_computer = </text>
+			String object_computer = </text>
 		<text></text>
 		<text>;</text>
 	</OBJECT-COMPUTER>
 	<INPUT-OUTPUT>
 		<text>
-		//input-output section</text>
+			
+					/* input-output section */
+		</text>
 	</INPUT-OUTPUT>
 	<FILE-CONTROL>
 		<text>
-		//File Control</text>
+		//	File Control</text>
 	</FILE-CONTROL>
-	<COPY>
-		<text>
-		** Copy Command</text>
-	</COPY>
+	
+	
 	<SELECT>
 		<text>
-		File </text>
-		<text>1</text>
-		<path>[\s*[A-Za-z0-9-",/]+\s*]+(ORGANIZATION)[\s*[A-Za-z0-9-",/]+\s*]+</path>
+		File 1</text>
+		<path>[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+(ASSIGN)\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
 	</SELECT>
-	<ORGANIZATION>
-		<text>= new File(1);</text>
-	</ORGANIZATION>
+	<ASSIGN>
+		<text>;</text>
+	</ASSIGN>
 	<DATA>
 		<text>
-		// Data Division</text>
+		/*		---------------------------------- 
+		 *			DATA DIVISION
+		 *		----------------------------------
+		 */</text>
 	</DATA>
+	
 	<FILE>
 		<text>
-		// File Section </text>
+					/* File Section */</text>
 	</FILE>
 	
 	<C01>
   		<text>
-  		String 1;  </text>
+  		String 1 ;</text>
+  		<text>1 = </text>
+  		<path></path>
+  		<text>;</text>
    	</C01>
   	<C03>
-  	
-  		<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(PIC)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
   		<text>
-  		String 1;</text>
- 	</C03>
+  		String 1 </text>
+  		<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(PIC)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
+  		<path></path>
+  		<text>;</text>
+  </C03>
   	
   	<C07>
+  	<text>
+  		public class 1 {  </text>
   		<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)\([0-9]+\)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
-  		<text>
-  		String 1;</text>
+  		
  
   	</C07>
   	<PIC>
   	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(XX)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
   	
   	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
-  		
+  	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
+  			
   	</PIC>
   	<XX>
 		<text>
 		String 1;</text>  	
   	</XX>
   	<X>
-  		<text>String 1;
-  		</text>
+  		<text>
+  		Char[</text>
+  		<path>\s*[0-9.]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*X\((\s*[0-9.]+\s*)\)\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
+  		<path>\s*[0-9.]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*X\((\s*[0-9.]+\s*)\)</path>
+  		<text>] 1;</text>
+  		<path></path>
   	</X>
   	<C9>
   		<text>int 1</text>
@@ -121,7 +140,8 @@
   		
   	</VALUE>
   	<C05>
-  		<path>.*(X)[(].*[)].*</path>
+  		<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(PIC)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
+  		<path>\s*[0-9.]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*(\s*[A-Za-z0-9-",/()@#:*=]+\s*)X\(\s*[0-9.]+\s*\)\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
   		<path></path>
   	</C05>
   	<WORKING-STORAGE>
@@ -131,46 +151,72 @@
   	</WORKING-STORAGE>
   	<VALUE></VALUE>
 	<PROCEDURE>
+	<text>
+		/*		------------------------------------- 
+		 *			PROCEDURE DIVISION
+		 *		-------------------------------------
+		 */</text>
 		<text>
-		public static void main(String args[]) { {</text>
+		public static void main(String args[]) { </text>
 		<text>
 		int block="";</text>
 		<text>
 		do {
 		</text>
+		<text>
+			switch (block) {
+			</text>
 		<path></path>
+		<path></path>
+		<text>
+			}</text>
 		<text>
 		} while (block != null);</text>
 		<text>
 		}</text>
 	</PROCEDURE>	
 	<COPY>
-  		<text>* Copy</text>
+  		<text>
+  		/* </text>
+  		<path>([\s*[A-Za-z0-9-",/()@#:*=]+\s*]+)</path>
+  		<text>\
+  		 */</text>
   	</COPY>
   	<OPEN>
   		<text>
-  		2</text>
-  		<text>Reader.read();</text>
+  		CharArrayReader 2Reader</text>
+ 		<path>[\s*[A-Za-z0-9-",/]+\s*]+(FILENAME)[\s*[A-Za-z0-9-",/]+\s*]+</path>
+  	
   	</OPEN>
   	<MOVE>
   		<text>
   		3 = 1;
   		</text>
+  		<path></path>
   	</MOVE>
   	<COMPUTE>
   		<text>0 1 2 3 </text>
   	</COMPUTE>
   	<PERFORM>
  	<text>
-  	public static final int </text><path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[0-9.]+-([A-Za-z0-9-",/()@#:*=]+)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+  	public static final int </text>
+  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[0-9.]+-([A-Za-z0-9-",/()@#:*=]+)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
   	<text> = </text>
   	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*([0-9.]+)-[A-Za-z0-9-",/()@#:*=]+[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
   	<text>;</text>
+  	<text>
+  	block = </text>
+  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[0-9.]+-([A-Za-z0-9-",/()@#:*=]+)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+  	<text> ; 
+  	continue ;
+  	</text>
+  	<path></path>
   	</PERFORM>
   	<GO>
   	<text>
   	continue </text>
-  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*[0-9.]+-([A-Za-z0-9-",/()@#:*=]+)</path>
+  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*[=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+GO TO\s*[0-9.]+\s*-(\s*[A-Za-z0-9-",/()@#:*=]+\s*)</path>
+  	<path>[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+GO TO\s*[0-9.]+\s*-(\s*[A-Za-z0-9-",/()@#:*=]+\s*)</path>
   	<text> ;</text>
   	</GO>
   	<ASSIGN></ASSIGN>
@@ -179,9 +225,10 @@
   		<text></text>
   	</VALUE>
   	<FD>
-  		<text>
-  		CharArrayReader 1Reader</text>
- 		<path>[\s*[A-Za-z0-9-",/]+\s*]+(FILENAME)[\s*[A-Za-z0-9-",/]+\s*]+</path>
+  	<text>
+  	1 = new File("</text>
+  	<path>[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+LIBRARY\s*[A-Za-z0-9-",/()@#:*=]+\s*"([A-Za-z0-9-",/()@#:*=]+)\s*"[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+  	<text>\\1");</text>
   	</FD>
   	<FILENAME>
   		<text>= new CharArrayReader(1);</text>
@@ -200,6 +247,32 @@
 			e.printStackTrace(2);
 		}</text>
   	</FILENAME>
+  	<CLOSE>
+  	<text>
+  	close file</text>
+  	<path></path>
+  	</CLOSE>
+  	<STOP>
+  	<text>
+  	block = null;
+  	continue;</text>
+  	<path></path></STOP>
+  	<READ>
+  	<text>
+  		1</text>
+  		<text>Reader.read();</text>
+  	</READ>
+  	<IF>
+  	<text>if(</text>
+  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*(\s*[A-Za-z0-9-",/()@#:*=]+\s*[=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+  	<text>) {
+  	</text>
+  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*[=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*(GO)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+  	
+  	<text>
+  	}</text>
+  	<path></path>
+  	</IF>
   	<LIBRARY>
   	
   	</LIBRARY>

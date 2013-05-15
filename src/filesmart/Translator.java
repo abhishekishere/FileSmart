@@ -25,6 +25,10 @@ public class Translator {
 	static final String ALNUM_STARTING_WITH_NEW_LINE = "\\n*"+ALPHANUMERIC_WORD_ENDING_IN_ANYTHING;
 	static final String NUMBER = "[0-9.]+";
 	static final String OPERAND = "\\s*"+NUMBER+"\\s*";
+	static final String OPERATOR = "[=]+";
+	static final String CONDITION = WORD+OPERATOR+WORD;
+	static final String COMMAND = "(MOVE)|(OPEN)|(ELSE)";
+	static final String COBOL_STATEMENT = COMMAND+SENTENCE;
 	
 	static {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -52,10 +56,15 @@ public class Translator {
 	}
 
 	public static void main(String[] args) {
-		String line = "GO TO 10-READ-MTRL";
+		String line = " FD  MTRL"+
+     "LABEL RECORDS ARE STANDARD"+
+         "VALUE OF FILENAME IS  \"MTRL\""+
+                  "LIBRARY  IS  \"EPSDATA\""+
+                  "VOLUME   IS   IVAR-WO-DATA-VOL"+
+                  "SPACE    IS   OLD-FILE-SIZE";
 		//command = doc.getElementsByTagName("IDENTIFICATION").item(0).getChildNodes().item(3);
 		//System.out.println(command);
-		String group = match(WORD+WORD+NUMBER+"-"+"("+SYMBOL+")" ,line);
+		String group = match(SENTENCE+"LIBRARY"+WORD+"\"("+SYMBOL+")\""+SENTENCE,line);
 		System.out.println(group);
 		
 	}
