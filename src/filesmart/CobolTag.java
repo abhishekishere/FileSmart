@@ -1,13 +1,6 @@
 package filesmart;
 
-import static filesmart.Translator.ALPHANUMERIC_WORD_ENDING_IN_ANYTHING;
-import static filesmart.Translator.OPERAND;
-import static filesmart.Translator.SENTENCE;
-import static filesmart.Translator.SYMBOL;
-import static filesmart.Translator.WORD;
-import static filesmart.Translator.command;
-import static filesmart.Translator.doc;
-import static filesmart.Translator.match;
+import static filesmart.Translator.*;
 
 import java.util.StringTokenizer;
 
@@ -15,56 +8,119 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl;
+
 public class CobolTag implements Runnable {
 	// immutable Shared data
 	String text; // put the program in this string
 	// mutable shared data
 	String name; // name of new Cobol Statement thread to be made
+	String operand_bkup;
+	String operand_new;
 	String line; // full cobol statement
 	String group; // matching group
 	NodeList syntax;
 	String value = "";
+	int i;
 	public static FileSmartMavenMain smartFile;
 
 	static {
-		smartFile = new FileSmartMavenMain(
-				"C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE_copy.cob",
-				"\\.");
+		smartFile = new FileSmartMavenMain("C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE_copy.cob","\\.");
 	}
+
+	// C:\\Users\\abhishekba\\git\\FileSmart\\resource\\MWOA.xml
 
 	public CobolTag() {
+		
 		for (line = smartFile.readLine(); line != null; line = smartFile
 				.readLine()) {
+			tight2looseMatching(line);
 			newThread(line);
 		}
+		// smartFile = new FileSmartMavenMain(cobol_file, "\\.");
+		// for (line = smartFile.readLine(); line != null; line = smartFile
+		// .readLine()) {
+		// tight2looseMatching(line);
+		// newThread(line);
+		// }
 
 	}
 
+	/**
+	 * @param currLine
+	 */
 	public void tight2looseMatching(String currLine) {
-		// First I check if it is a case
-		name = match(OPERAND + "-" + "(" + SYMBOL + ")", currLine);
-		if (name != null) {
-			name = "case " + name + ":";
-			return;
-		}
-		// Record Format Description
-		if (name != null)
-			return;
-		name = match("(" + OPERAND + ")" + SENTENCE, currLine);
 
-		if (name != null) {
-			name = "C" + name.trim();
-			if (name != null)
-				return;
-		}
-		// checking for single word command like "Program-Id"
+		/* Paragraphs starting */
+		 name = match(OPERAND + "-" + "(" + SYMBOL + ")", currLine);
+		 if (name != null) {
+		 String caseValue = match("(" + OPERAND + ")" + "-" + SYMBOL,
+		 currLine);
+		 name = "\n\tcase " + name + ":" + "\npublic static final int " + name
+		 + " = " + caseValue.trim() + ";\n";
+		 return;
+		 }
+		 if (name != null)
+		 return;
+
+		/*
+		 * Run to get 01 command tags properly
+		 */
+		// operand_bkup = "01";
+		// name = match("(" + OPERAND + ")" + SENTENCE, currLine);
+		// operand_new = name;
+		// if (name != null) {
+		// if ((Integer.parseInt(operand_bkup.trim()) == Integer
+		// .parseInt(operand_new.trim()) - 2)
+		// || Integer.parseInt(name.trim()) == 01) {
+		//
+		// name = "C" + name.trim();
+		// if (name != null)
+		// return;
+		// }
+		// }
+		/*
+		 * Run to get 03 command tags properly
+		 */
+		// operand_bkup = "03";
+		// name = match("(" + OPERAND + ")" + SENTENCE, currLine);
+		// operand_new = name;
+		// if (name != null) {
+		// if ((Integer.parseInt(operand_bkup.trim()) == Integer
+		// .parseInt(operand_new.trim()) - 2)
+		// || Integer.parseInt(name.trim()) == 03) {
+		//
+		// name = "CC" + name.trim();
+		// if (name != null)
+		// return;
+		// }
+		// }
+
+		/*
+		 * Run to get 05 command tags properly
+		 */
+		// operand_bkup = "05";
+		// name = match("(" + OPERAND + ")" + SENTENCE, currLine);
+		// operand_new = name;
+		// if (name != null) {
+		// if ((Integer.parseInt(operand_bkup.trim()) == Integer
+		// .parseInt(operand_new.trim()) - 2)
+		// || Integer.parseInt(name.trim()) == 05) {
+		//
+		// name = "CCC" + name.trim();
+		// if (name != null)
+		// return;
+		// }
+		// }
+
+		/* checking for single word command like "Program-Id" */
 		if (name == null) {
-			name = match("(" + WORD + ")", currLine);
+			name = match(SPACE + "(" + PROCEDURE_COMMANDS + ")" + SENTENCE,
+					currLine);
 
 		}
 		if (name != null)
 			return;
-		
 
 		name = null;
 	}
@@ -78,9 +134,11 @@ public class CobolTag implements Runnable {
 			Element comm = (Element) command;
 
 			if (command != null) {
+				NodeList syntax_bkup = syntax;
+				int i_bkup = i;
 				syntax = comm.getChildNodes();
 
-				for (int i = 0; i < syntax.getLength(); i++) {
+				for (i = 0; i < syntax.getLength(); i++) {
 
 					Node type = syntax.item(i);
 
@@ -88,37 +146,31 @@ public class CobolTag implements Runnable {
 					if (value == "") {
 						line = smartFile.readLine();
 						command = null;
+
+						tight2looseMatching(line);
 						newThread(line);
 
 					}
 					if (type.getNodeName() == "path") {
-
-						if (value != "") {
-							name = match(value, line);
-							if (name != null)
-								command = doc.getElementsByTagName(name.trim())
-										.item(0);
-							if (command != null) {
-								newThread("");
-							} else {
-								slowWriteAsItIs(name);
-								text = text + name;
-							}
-						}
-
+						name = match(value, line);
+						if (name != null)
+							newThread(line);
+						else
+							continue;
 					}
-
 					if (type.getNodeName() == "text") {
 						slowWrite(value);
 						text = text + value;
 					}
 				}
+				syntax = syntax_bkup;
+				i = i_bkup;
 			} else {
 				slowWriteAsItIs(name);
 				text = text + name;
+
 			}
 		}
-
 	}
 
 	private void slowWriteAsItIs(String text1) {
@@ -128,7 +180,7 @@ public class CobolTag implements Runnable {
 	}
 
 	public void newThread(String whichLine) {
-		tight2looseMatching(whichLine);
+
 		CobolStatement cs1 = new CobolStatement(this, name, whichLine);
 
 		cs1.start();
@@ -138,7 +190,7 @@ public class CobolTag implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		name = cs1.getName();
+		name = cs1.getName1();
 		line = cs1.getLine();
 	}
 

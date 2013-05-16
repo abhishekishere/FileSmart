@@ -17,9 +17,10 @@ public class Translator {
 	static Node command;
 	static final String xml = "C:\\Users\\abhishekba\\git\\FileSmart\\resource\\c2j.xml";
 	static final String ALPHANUMNERIC_WORD = "\\s*([A-Za-z0-9-]+)\\s*";
-	
+	static final String ALPHABETIC_WORD = "\\s*([A-Za-z]+)\\s*"; 
 	static final String ALPHANUMERIC_WORD_ENDING_IN_ANYTHING = "\\s*([a-zA-Z0-9-]*)\\s*.*";
 	static final String SYMBOL = "[A-Za-z0-9-\",/()@#:*=.]+";
+	static final String SPACE = "\\s+";
 	static final String WORD = "\\s*"+SYMBOL+"\\s*";
 	static final String SENTENCE = "["+ WORD+"]+";
 	static final String ALNUM_STARTING_WITH_NEW_LINE = "\\n*"+ALPHANUMERIC_WORD_ENDING_IN_ANYTHING;
@@ -27,8 +28,9 @@ public class Translator {
 	static final String OPERAND = "\\s*"+NUMBER+"\\s*";
 	static final String OPERATOR = "[=]+";
 	static final String CONDITION = WORD+OPERATOR+WORD;
-	static final String COMMAND = "(MOVE)|(OPEN)|(ELSE)";
+	static final String COMMAND = "(MOVE)|(OPEN)|(ELSE)|(FD)";
 	static final String COBOL_STATEMENT = COMMAND+SENTENCE;
+	static final String PROCEDURE_COMMANDS = "(PROCEDURE)|(OPEN)|(MOVE)|(COMPUTE)|(PERFORM)|(CLOSE)|(STOP)|(GO)";
 	
 	
 	static {
@@ -57,10 +59,10 @@ public class Translator {
 	}
 
 	public static void main(String[] args) {
-		String line = "COMPUTE FILE-SIZE = OLD-FILE-SIZE * .7 ";
+		String line = "01  OLD-FILE-SIZE         PIC 9(05)        VALUE 0";
 		//command = doc.getElementsByTagName("IDENTIFICATION").item(0).getChildNodes().item(3);
 		//System.out.println(command);
-		String group = match(WORD+"("+SENTENCE+")",line);
+		String group = match(OPERAND+SPACE+WORD+SPACE+"("+WORD+")"+SPACE+SENTENCE,line);
 		System.out.println(group);
 		
 	}

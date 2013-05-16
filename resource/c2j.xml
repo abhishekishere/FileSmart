@@ -85,44 +85,55 @@
 		<text>
 					/* File Section */</text>
 	</FILE>
-	
 	<C01>
-  		<text>
-  		String 1 ;</text>
- 		<text>;</text>
-   	</C01>
-  	<C03>
-  		<text>
-  		String 1 </text>
-  		<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(PIC)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
-  		<text>;</text>
-  </C03>
-  	
-  	<C07>
-  	<text>
-  		public class 1 {  </text>
-  		<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)\([0-9]+\)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
-  		
- 
-  	</C07>
+		<text>
+			public static String 1;</text>
+			<text>
+			public static String 1Pattern = </text> 
+			<path>\s*[0-9.]+\s*\s+\s*[A-Za-z0-9-",/()@#:*=.]+\s*\s+(\s*[A-Za-z0-9-",/()@#:*=.]+\s*)\s+[\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+</path>
+			
+			<text></text>
+	</C01>
+	<C03>
+	<text>+1Pattern</text><path></path></C03>
+	<CC03>
+		<text>
+			public static String 1;</text>
+			<text>
+			public static String 1Pattern = </text> 
+			<path>\s*[0-9.]+\s*\s+\s*[A-Za-z0-9-",/()@#:*=.]+\s*\s+(\s*[A-Za-z0-9-",/()@#:*=.]+\s*)\s+[\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+</path>
+			
+			<text></text>
+	</CC03>
+	<CC05>
+	<text>+1Pattern</text><path></path></CC05>
+	<CCC05>
+		<text>
+			public static String 1;</text>
+			<text>
+			public static String 1Pattern = </text> 
+			<path>\s*[0-9.]+\s*\s+\s*[A-Za-z0-9-",/()@#:*=.]+\s*\s+(\s*[A-Za-z0-9-",/()@#:*=.]+\s*)\s+[\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+</path>
+			
+			<text></text>
+	</CCC05>
+	<CCC07>
+	<text>+1Pattern</text><path></path></CCC07>
+	
   	<PIC>
   	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(XX)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
-  	
-  	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
+ 	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
   	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
   			
   	</PIC>
+  	
   	<XX>
 		<text>
 		String 1;</text>  	
   	</XX>
-  	<X>
-  		<text>
-  		Char[</text>
-  		<path>\s*[0-9.]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*X\((\s*[0-9.]+\s*)\)\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
+  	<X>	<text>(\\w+</text>
   		<path>\s*[0-9.]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*X\((\s*[0-9.]+\s*)\)</path>
-  		<text>] 1;</text>
-  		<path></path>
+  		<text>) ;</text>
+  		 
   	</X>
   	<C9>
   		<text>int 1</text>
@@ -156,14 +167,14 @@
 		<text>
 		public static void main(String args[]) { </text>
 		<text>
-		int block=START_CODE;</text>
+		int block=START-CODE;</text>
 		<text>
 		do {
 		</text>
 		<text>
 			switch (block) {
 			</text>
-		
+		<path></path>
 		<text>
 			}</text>
 		<text>

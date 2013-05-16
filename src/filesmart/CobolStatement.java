@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public class CobolStatement extends Thread {
 
-	String name;
+	String name1;
 	
 
 	public String getLine() {
@@ -26,10 +26,18 @@ public class CobolStatement extends Thread {
 
 	public CobolStatement(CobolTag cobolTag, String name, String line) {
 		super(cobolTag);
-		this.name = name;
+		this.name1 = name;
 		this.line = line;
 		
 
+	}
+
+	public String getName1() {
+		return name1;
+	}
+
+	public void setName1(String name1) {
+		this.name1 = name1;
 	}
 
 	public void addTag(CobolTag obj) {
