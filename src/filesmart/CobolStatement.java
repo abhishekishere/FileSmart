@@ -5,6 +5,16 @@ import java.util.HashSet;
 public class CobolStatement extends Thread {
 
 	String name;
+	
+
+	public String getLine() {
+		return line;
+	}
+
+	public void setLine(String line) {
+		this.line = line;
+	}
+
 	String line;
 	
 	HashSet<CobolTag> hierarchy;

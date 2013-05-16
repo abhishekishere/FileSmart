@@ -19,7 +19,7 @@ public class Translator {
 	static final String ALPHANUMNERIC_WORD = "\\s*([A-Za-z0-9-]+)\\s*";
 	
 	static final String ALPHANUMERIC_WORD_ENDING_IN_ANYTHING = "\\s*([a-zA-Z0-9-]*)\\s*.*";
-	static final String SYMBOL = "[A-Za-z0-9-\",/()@#:*=]+";
+	static final String SYMBOL = "[A-Za-z0-9-\",/()@#:*=.]+";
 	static final String WORD = "\\s*"+SYMBOL+"\\s*";
 	static final String SENTENCE = "["+ WORD+"]+";
 	static final String ALNUM_STARTING_WITH_NEW_LINE = "\\n*"+ALPHANUMERIC_WORD_ENDING_IN_ANYTHING;
@@ -29,6 +29,7 @@ public class Translator {
 	static final String CONDITION = WORD+OPERATOR+WORD;
 	static final String COMMAND = "(MOVE)|(OPEN)|(ELSE)";
 	static final String COBOL_STATEMENT = COMMAND+SENTENCE;
+	
 	
 	static {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -56,15 +57,10 @@ public class Translator {
 	}
 
 	public static void main(String[] args) {
-		String line = " FD  MTRL"+
-     "LABEL RECORDS ARE STANDARD"+
-         "VALUE OF FILENAME IS  \"MTRL\""+
-                  "LIBRARY  IS  \"EPSDATA\""+
-                  "VOLUME   IS   IVAR-WO-DATA-VOL"+
-                  "SPACE    IS   OLD-FILE-SIZE";
+		String line = "COMPUTE FILE-SIZE = OLD-FILE-SIZE * .7 ";
 		//command = doc.getElementsByTagName("IDENTIFICATION").item(0).getChildNodes().item(3);
 		//System.out.println(command);
-		String group = match(SENTENCE+"LIBRARY"+WORD+"\"("+SYMBOL+")\""+SENTENCE,line);
+		String group = match(WORD+"("+SENTENCE+")",line);
 		System.out.println(group);
 		
 	}

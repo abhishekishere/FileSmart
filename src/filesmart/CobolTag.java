@@ -1,11 +1,15 @@
 package filesmart;
 
-import static filesmart.Translator.*;
+import static filesmart.Translator.ALPHANUMERIC_WORD_ENDING_IN_ANYTHING;
+import static filesmart.Translator.OPERAND;
+import static filesmart.Translator.SENTENCE;
+import static filesmart.Translator.SYMBOL;
+import static filesmart.Translator.WORD;
+import static filesmart.Translator.command;
+import static filesmart.Translator.doc;
+import static filesmart.Translator.match;
 
 import java.util.StringTokenizer;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.soap.Text;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -31,105 +35,90 @@ public class CobolTag implements Runnable {
 	public CobolTag() {
 		for (line = smartFile.readLine(); line != null; line = smartFile
 				.readLine()) {
-
-			tight2looseMatching();
-
-			if (name != null)
-				command = doc.getElementsByTagName(name.trim()).item(0);
-			if (command != null) {
-				newThread();
-			}
+			newThread(line);
 		}
+
 	}
 
-	public void tight2looseMatching() {
+	public void tight2looseMatching(String currLine) {
 		// First I check if it is a case
-		name = match(OPERAND+"-"+"("+SYMBOL+")" ,line);
-		if(name != null) {
-			name = "case "+name+":" ;
+		name = match(OPERAND + "-" + "(" + SYMBOL + ")", currLine);
+		if (name != null) {
+			name = "case " + name + ":";
 			return;
 		}
-		
-		if(name != null) return;
-		name = match("(" + OPERAND + ")" + SENTENCE, line);
-		
+		// Record Format Description
+		if (name != null)
+			return;
+		name = match("(" + OPERAND + ")" + SENTENCE, currLine);
+
 		if (name != null) {
 			name = "C" + name.trim();
-			if(name != null) return;
+			if (name != null)
+				return;
 		}
 		// checking for single word command like "Program-Id"
-		if(name == null) {
-			name = match("("+WORD+")",line);
-			
-		}
-		if(name != null) return;
-		// Checking for multiple word command
-		if(name== null) {
-			name = match("("+WORD+")"+SENTENCE,line); return;
-		}
 		if (name == null) {
-			name = match(ALPHANUMERIC_WORD_ENDING_IN_ANYTHING, line);
-			name = match("(" + WORD + ")" + WORD, line);
-			if(name != null) return;
+			name = match("(" + WORD + ")", currLine);
+
 		}
-		if (name == null) {
-			name = match("(" + WORD + ")" + SENTENCE, line);
-			if(name != null) return;
-		}
-		name =null;
+		if (name != null)
+			return;
+		
+
+		name = null;
 	}
 
 	// Shared Code
 	@Override
 	public void run() {
 
-		for (int i = 0; i < syntax.getLength(); i++) {
+		if (name != null) {
+			command = doc.getElementsByTagName(name.trim()).item(0);
+			Element comm = (Element) command;
 
-			Node type = syntax.item(i);
+			if (command != null) {
+				syntax = comm.getChildNodes();
 
-			value = type.getTextContent();
-			if (value == "") {
-				line = smartFile.readLine();
-				
-				/*
-				 * name = match(ALPHANUMNERIC_WORD, line); if (name == null) {
-				 * name = match("(" + SENTENCE + ")", line); } slowWrite(name);
-				 * text = text + name;
-				 */
-			}
-			if (type.getNodeName() == "path") {
-				
-				command = null;
-				if(value != null) {
-					name = match(value,line);
-				}
-				
-				if (name != null) {
-					command = doc.getElementsByTagName(name.trim()).item(0);
-					if (command != null) {
-						NodeList syntax_bkup = syntax;
-						int i_bkup = i;
-						newThread();
-						syntax = syntax_bkup;
-						i = i_bkup;
-					} else {
+				for (int i = 0; i < syntax.getLength(); i++) {
 
-						slowWriteAsItIs(name);
-						text = text + name;
+					Node type = syntax.item(i);
+
+					value = type.getTextContent();
+					if (value == "") {
+						line = smartFile.readLine();
+						command = null;
+						newThread(line);
+
+					}
+					if (type.getNodeName() == "path") {
+
+						if (value != "") {
+							name = match(value, line);
+							if (name != null)
+								command = doc.getElementsByTagName(name.trim())
+										.item(0);
+							if (command != null) {
+								newThread("");
+							} else {
+								slowWriteAsItIs(name);
+								text = text + name;
+							}
+						}
+
+					}
+
+					if (type.getNodeName() == "text") {
+						slowWrite(value);
+						text = text + value;
 					}
 				}
-
-			}
-
-			if (type.getNodeName() == "text") {
-				if(value=="") {
-					slowWrite(line);
-					text = text + line;
-				}
-				slowWrite(value);
-				text = text + value;
+			} else {
+				slowWriteAsItIs(name);
+				text = text + name;
 			}
 		}
+
 	}
 
 	private void slowWriteAsItIs(String text1) {
@@ -138,11 +127,10 @@ public class CobolTag implements Runnable {
 		System.out.print(text1);
 	}
 
-	public void newThread() {
-		Element comm = (Element) command;
+	public void newThread(String whichLine) {
+		tight2looseMatching(whichLine);
+		CobolStatement cs1 = new CobolStatement(this, name, whichLine);
 
-		syntax = comm.getChildNodes();
-		CobolStatement cs1 = new CobolStatement(this, name, line);
 		cs1.start();
 		try {
 			cs1.join();
@@ -150,13 +138,14 @@ public class CobolTag implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		name = cs1.getName();
+		line = cs1.getLine();
 	}
 
 	private void slowWrite(String text) {
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

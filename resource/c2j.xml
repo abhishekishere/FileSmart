@@ -89,15 +89,12 @@
 	<C01>
   		<text>
   		String 1 ;</text>
-  		<text>1 = </text>
-  		<path></path>
-  		<text>;</text>
+ 		<text>;</text>
    	</C01>
   	<C03>
   		<text>
   		String 1 </text>
   		<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(PIC)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
-  		<path></path>
   		<text>;</text>
   </C03>
   	
@@ -159,15 +156,14 @@
 		<text>
 		public static void main(String args[]) { </text>
 		<text>
-		int block="";</text>
+		int block=START_CODE;</text>
 		<text>
 		do {
 		</text>
 		<text>
 			switch (block) {
 			</text>
-		<path></path>
-		<path></path>
+		
 		<text>
 			}</text>
 		<text>
@@ -184,18 +180,20 @@
   	</COPY>
   	<OPEN>
   		<text>
-  		CharArrayReader 2Reader</text>
- 		<path>[\s*[A-Za-z0-9-",/]+\s*]+(FILENAME)[\s*[A-Za-z0-9-",/]+\s*]+</path>
-  	
+  		Scanner 2Scanner ;</text>
+ 		<text>
+ 		2Scanner = new Scanner(new BufferedReader(2Reader));</text>
+  		
   	</OPEN>
   	<MOVE>
   		<text>
   		3 = 1;
   		</text>
-  		<path></path>
+  		
   	</MOVE>
   	<COMPUTE>
-  		<text>0 1 2 3 </text>
+  		<path>\s*[A-Za-z0-9-",/()@#:*=.]+\s*([\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+)</path>
+  		<text>;</text>
   	</COMPUTE>
   	<PERFORM>
  	<text>
@@ -262,6 +260,10 @@
   		1</text>
   		<text>Reader.read();</text>
   	</READ>
+  	<WRITE>
+  		<text>
+  		1Writer.write(1);</text>
+  	</WRITE>
   	<IF>
   	<text>if(</text>
   	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*(\s*[A-Za-z0-9-",/()@#:*=]+\s*[=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
@@ -271,7 +273,7 @@
   	
   	<text>
   	}</text>
-  	<path></path>
+  	
   	</IF>
   	<LIBRARY>
   	
