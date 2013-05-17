@@ -8,8 +8,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.sun.org.apache.xalan.internal.xsltc.trax.SmartTransformerFactoryImpl;
-
 public class CobolTag implements Runnable {
 	// immutable Shared data
 	String text; // put the program in this string
@@ -25,25 +23,21 @@ public class CobolTag implements Runnable {
 	public static FileSmartMavenMain smartFile;
 
 	static {
-		smartFile = new FileSmartMavenMain("C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE_copy.cob","\\.");
+		smartFile = new FileSmartMavenMain(
+				"C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE_copy.cob",
+				"\\.");
 	}
 
 	// C:\\Users\\abhishekba\\git\\FileSmart\\resource\\MWOA.xml
 
 	public CobolTag() {
-		
+
 		for (line = smartFile.readLine(); line != null; line = smartFile
 				.readLine()) {
 			tight2looseMatching(line);
 			newThread(line);
 		}
-		// smartFile = new FileSmartMavenMain(cobol_file, "\\.");
-		// for (line = smartFile.readLine(); line != null; line = smartFile
-		// .readLine()) {
-		// tight2looseMatching(line);
-		// newThread(line);
-		// }
-
+	
 	}
 
 	/**
@@ -52,33 +46,39 @@ public class CobolTag implements Runnable {
 	public void tight2looseMatching(String currLine) {
 
 		/* Paragraphs starting */
-		 name = match(OPERAND + "-" + "(" + SYMBOL + ")", currLine);
-		 if (name != null) {
-		 String caseValue = match("(" + OPERAND + ")" + "-" + SYMBOL,
-		 currLine);
-		 name = "\n\tcase " + name + ":" + "\npublic static final int " + name
-		 + " = " + caseValue.trim() + ";\n";
-		 return;
-		 }
-		 if (name != null)
-		 return;
+		name = match(OPERAND + "-" + "(" + SYMBOL + ")", currLine);
+		if (name != null) {
+			String caseValue = match("(" + OPERAND + ")" + "-" + SYMBOL,
+					currLine);
+			name = "\n\tcase " + name + ":" + "\npublic static final int "
+					+ name + " = " + caseValue.trim() + ";\n";
+			// return;
+			// slowWriteAsItIs(name);
+			// text = text +
+			// name; line =
+			smartFile.readLine();
+			tight2looseMatching(line);
+			newThread(line);
+		}
+		if (name != null)
+			return;
 
 		/*
 		 * Run to get 01 command tags properly
 		 */
-		// operand_bkup = "01";
-		// name = match("(" + OPERAND + ")" + SENTENCE, currLine);
-		// operand_new = name;
-		// if (name != null) {
-		// if ((Integer.parseInt(operand_bkup.trim()) == Integer
-		// .parseInt(operand_new.trim()) - 2)
-		// || Integer.parseInt(name.trim()) == 01) {
-		//
-		// name = "C" + name.trim();
-		// if (name != null)
-		// return;
-		// }
-		// }
+		 operand_bkup = "01";
+		 name = match("(" + OPERAND + ")" + SENTENCE, currLine);
+		 operand_new = name;
+		 if (name != null) {
+		 if ((Integer.parseInt(operand_bkup.trim()) == Integer
+		 .parseInt(operand_new.trim()) - 2)
+		 || Integer.parseInt(name.trim()) == 01) {
+				
+		 name = "C" + name.trim();
+		 if (name != null)
+		 return;
+		 }
+		 }
 		/*
 		 * Run to get 03 command tags properly
 		 */
@@ -89,7 +89,7 @@ public class CobolTag implements Runnable {
 		// if ((Integer.parseInt(operand_bkup.trim()) == Integer
 		// .parseInt(operand_new.trim()) - 2)
 		// || Integer.parseInt(name.trim()) == 03) {
-		//
+		//		
 		// name = "CC" + name.trim();
 		// if (name != null)
 		// return;
@@ -99,28 +99,27 @@ public class CobolTag implements Runnable {
 		/*
 		 * Run to get 05 command tags properly
 		 */
-		// operand_bkup = "05";
-		// name = match("(" + OPERAND + ")" + SENTENCE, currLine);
-		// operand_new = name;
-		// if (name != null) {
-		// if ((Integer.parseInt(operand_bkup.trim()) == Integer
-		// .parseInt(operand_new.trim()) - 2)
-		// || Integer.parseInt(name.trim()) == 05) {
-		//
-		// name = "CCC" + name.trim();
-		// if (name != null)
-		// return;
-		// }
-		// }
+		operand_bkup = "05";
+		name = match("(" + OPERAND + ")" + SENTENCE, currLine);
+		operand_new = name;
+		if (name != null) {
+			if ((Integer.parseInt(operand_bkup.trim()) == Integer
+					.parseInt(operand_new.trim()) - 2)
+					|| Integer.parseInt(name.trim()) == 05) {
 
-		/* checking for single word command like "Program-Id" */
-		if (name == null) {
-			name = match(SPACE + "(" + PROCEDURE_COMMANDS + ")" + SENTENCE,
-					currLine);
-
+				name = "CCC" + name.trim();
+				if (name != null)
+					return;
+			}
 		}
-		if (name != null)
-			return;
+
+		/*
+		 * checking for single word command like "Program-Id" if (name == null)
+		 * { name = match(SPACE + "(" + PROCEDURE_COMMANDS + ")" + SENTENCE,
+		 * currLine);
+		 * 
+		 * } if (name != null) return;
+		 */
 
 		name = null;
 	}

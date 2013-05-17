@@ -30,7 +30,7 @@ public class Translator {
 	static final String CONDITION = WORD+OPERATOR+WORD;
 	static final String COMMAND = "(MOVE)|(OPEN)|(ELSE)|(FD)";
 	static final String COBOL_STATEMENT = COMMAND+SENTENCE;
-	static final String PROCEDURE_COMMANDS = "(PROCEDURE)|(OPEN)|(MOVE)|(COMPUTE)|(PERFORM)|(CLOSE)|(STOP)|(GO)";
+	static final String PROCEDURE_COMMANDS = "(PROCEDURE)|(OPEN)|(MOVE)|(COMPUTE)|(PERFORM)|(CLOSE)|(STOP)|(GO)|(READ)|(COPY)|(IF)|(EXIT)";
 	
 	
 	static {
@@ -59,10 +59,10 @@ public class Translator {
 	}
 
 	public static void main(String[] args) {
-		String line = "01  OLD-FILE-SIZE         PIC 9(05)        VALUE 0";
+		String line = "OPEN INPUT MTRL";
 		//command = doc.getElementsByTagName("IDENTIFICATION").item(0).getChildNodes().item(3);
 		//System.out.println(command);
-		String group = match(OPERAND+SPACE+WORD+SPACE+"("+WORD+")"+SPACE+SENTENCE,line);
+		String group = match(WORD+SPACE+"("+WORD+")"+SPACE+SENTENCE,line);
 		System.out.println(group);
 		
 	}
