@@ -5,7 +5,7 @@ import java.util.HashSet;
 public class CobolStatement extends Thread {
 
 	String name1;
-	
+	Thread parent;
 
 	public String getLine() {
 		return line;
@@ -24,12 +24,20 @@ public class CobolStatement extends Thread {
 		hierarchy = new HashSet<CobolTag>();
 	}
 
-	public CobolStatement(CobolTag cobolTag, String name, String line) {
+	public CobolStatement(CobolTag cobolTag, String name, String line, Thread parent ) {
 		super(cobolTag);
 		this.name1 = name;
 		this.line = line;
-		
+		this.parent = parent;
 
+	}
+
+	public Thread getParent() {
+		return parent;
+	}
+
+	public void setParent(Thread parent) {
+		this.parent = parent;
 	}
 
 	public String getName1() {

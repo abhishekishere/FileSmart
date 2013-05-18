@@ -31,7 +31,7 @@ public class Translator {
 	static final String COMMAND = "(MOVE)|(OPEN)|(ELSE)|(FD)";
 	static final String COBOL_STATEMENT = COMMAND+SENTENCE;
 	static final String PROCEDURE_COMMANDS = "(PROCEDURE)|(OPEN)|(MOVE)|(COMPUTE)|(PERFORM)|(CLOSE)|(STOP)|(GO)|(READ)|(COPY)|(IF)|(EXIT)";
-	
+	static final String SET = "(\\S++\\s++)";
 	
 	static {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -51,7 +51,7 @@ public class Translator {
 		Pattern p = Pattern.compile(pattern);
 		Matcher m = p.matcher(line);
 		if (m.matches()) {
-			result = m.group(1);
+			result = m.group(1).trim();
 		} else {
 			result = null;
 		}
@@ -59,10 +59,10 @@ public class Translator {
 	}
 
 	public static void main(String[] args) {
-		String line = "OPEN INPUT MTRL";
+		String line = "03  FILLER                  PIC X(03)";
 		//command = doc.getElementsByTagName("IDENTIFICATION").item(0).getChildNodes().item(3);
 		//System.out.println(command);
-		String group = match(WORD+SPACE+"("+WORD+")"+SPACE+SENTENCE,line);
+		String group = match("\\p{Space}*"+SET+"{3}.*" ,line+" ");
 		System.out.println(group);
 		
 	}

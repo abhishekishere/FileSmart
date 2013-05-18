@@ -13,7 +13,7 @@ public class CobolTag implements Runnable {
 	String text; // put the program in this string
 	// mutable shared data
 	String name; // name of new Cobol Statement thread to be made
-	String operand_bkup;
+	static String operand_bkup;
 	String operand_new;
 	String line; // full cobol statement
 	String group; // matching group
@@ -24,7 +24,7 @@ public class CobolTag implements Runnable {
 
 	static {
 		smartFile = new FileSmartMavenMain(
-				"C:\\Users\\abhishekba\\COBOL\\IWIMS_Code\\EPSSUBS\\EMATCRE_copy.cob",
+				"C:\\Users\\abhishekba\\MWOAUD.dat",
 				"\\.");
 	}
 
@@ -34,10 +34,11 @@ public class CobolTag implements Runnable {
 
 		for (line = smartFile.readLine(); line != null; line = smartFile
 				.readLine()) {
+			line = line + " ";
 			tight2looseMatching(line);
 			newThread(line);
 		}
-	
+
 	}
 
 	/**
@@ -46,39 +47,66 @@ public class CobolTag implements Runnable {
 	public void tight2looseMatching(String currLine) {
 
 		/* Paragraphs starting */
-		name = match(OPERAND + "-" + "(" + SYMBOL + ")", currLine);
-		if (name != null) {
-			String caseValue = match("(" + OPERAND + ")" + "-" + SYMBOL,
-					currLine);
-			name = "\n\tcase " + name + ":" + "\npublic static final int "
-					+ name + " = " + caseValue.trim() + ";\n";
-			// return;
-			// slowWriteAsItIs(name);
-			// text = text +
-			// name; line =
-			smartFile.readLine();
-			tight2looseMatching(line);
-			newThread(line);
-		}
-		if (name != null)
-			return;
+		// name = match(OPERAND + "-" + "(" + SYMBOL + ")", currLine);
+		// if (name != null) {
+		// String caseValue = match("(" + OPERAND + ")" + "-" + SYMBOL,
+		// currLine);
+		// name = "\n\tcase " + name + ":" + "\npublic static final int "
+		// + name + " = " + caseValue.trim() + ";\n";
+		// // return;
+		// slowWriteAsItIs(name);
+		// text = text + name;
+		// line = smartFile.readLine();
+		// tight2looseMatching(line);
+		// newThread(line);
+		// }
+		// if (name != null)
+		// return;
+		/* Get All the memory variables */
 
+		// name = match("\\p{Space}*"+SET+"{3}.*" , currLine);
+		// if (name != null){
+		// if (name.equals("PIC")) {
+		//		
+		// name = "MV";
+		// if (name != null)
+		// return;
+		//		
+		// }}
+		/* Get the hierarchy */
+		// if(operand_bkup == null) operand_bkup = "03";
+		// name = match("\\p{Space}*" + SET + "{1}.*", currLine);
+		//		
+		// if (name != null) {
+		// if (match("(\\p{Digit}{2})", name) != null) {
+		// if(Integer.parseInt(name)>) {
+		// if (name != null)
+		// name = "REC";
+		// return;
+		//
+		// }else {
+		// //operand_bkup = name;
+		// name = "BACK";
+		//				
+		// return;
+		// }
+		// } }
 		/*
 		 * Run to get 01 command tags properly
 		 */
-		 operand_bkup = "01";
-		 name = match("(" + OPERAND + ")" + SENTENCE, currLine);
-		 operand_new = name;
-		 if (name != null) {
-		 if ((Integer.parseInt(operand_bkup.trim()) == Integer
-		 .parseInt(operand_new.trim()) - 2)
-		 || Integer.parseInt(name.trim()) == 01) {
-				
-		 name = "C" + name.trim();
-		 if (name != null)
-		 return;
-		 }
-		 }
+		// operand_bkup = "01";
+		// name = match("(" + OPERAND + ")" + SENTENCE, currLine);
+		// operand_new = name;
+		// if (name != null) {
+		// if ((Integer.parseInt(operand_bkup.trim()) == Integer
+		// .parseInt(operand_new.trim()) - 2)
+		// || Integer.parseInt(name.trim()) == 01) {
+		//
+		// name = "C" + name.trim();
+		// if (name != null)
+		// return;
+		// }
+		// }
 		/*
 		 * Run to get 03 command tags properly
 		 */
@@ -99,27 +127,29 @@ public class CobolTag implements Runnable {
 		/*
 		 * Run to get 05 command tags properly
 		 */
-		operand_bkup = "05";
-		name = match("(" + OPERAND + ")" + SENTENCE, currLine);
-		operand_new = name;
-		if (name != null) {
-			if ((Integer.parseInt(operand_bkup.trim()) == Integer
-					.parseInt(operand_new.trim()) - 2)
-					|| Integer.parseInt(name.trim()) == 05) {
+		// operand_bkup = "05";
+		// name = match("(" + OPERAND + ")" + SENTENCE, currLine);
+		// operand_new = name;
+		//		
+		// if (name != null) {
+		// if ((Integer.parseInt(operand_bkup.trim()) == Integer
+		// .parseInt(operand_new.trim()) - 2)
+		// || Integer.parseInt(name.trim()) == 05) {
+		//
+		// name = "CCC" + name.trim();
+		// if (name != null)
+		// return;
+		// }
+		// }
 
-				name = "CCC" + name.trim();
-				if (name != null)
-					return;
-			}
-		}
-
-		/*
-		 * checking for single word command like "Program-Id" if (name == null)
-		 * { name = match(SPACE + "(" + PROCEDURE_COMMANDS + ")" + SENTENCE,
-		 * currLine);
-		 * 
-		 * } if (name != null) return;
-		 */
+		/* checking for single word command like "Program-Id" */
+		 if (name == null) {
+		 name = match(SPACE + "(" + PROCEDURE_COMMANDS + ")" + SENTENCE,
+		 currLine);
+		
+		 }
+		 if (name != null)
+		 return;
 
 		name = null;
 	}
@@ -144,6 +174,7 @@ public class CobolTag implements Runnable {
 					value = type.getTextContent();
 					if (value == "") {
 						line = smartFile.readLine();
+						line = line + " ";
 						command = null;
 
 						tight2looseMatching(line);
@@ -180,7 +211,8 @@ public class CobolTag implements Runnable {
 
 	public void newThread(String whichLine) {
 
-		CobolStatement cs1 = new CobolStatement(this, name, whichLine);
+		CobolStatement cs1 = new CobolStatement(this, name, whichLine, Thread
+				.currentThread());
 
 		cs1.start();
 		try {

@@ -108,24 +108,46 @@
 	<CC05>
 	<text>+1Pattern</text><path></path></CC05>
 	<CCC05>
-		<text>
-			public static String 1;</text>
-			<text>
-			public static String 1Pattern = </text> 
-			<path>\s*[0-9.]+\s*\s+\s*[A-Za-z0-9-",/()@#:*=.]+\s*\s+(\s*[A-Za-z0-9-",/()@#:*=.]+\s*)\s+[\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+</path>
+		
+			<!-- FILLER format -->
+			<path>\p{Space}*(\S++\s++){2}.*</path>
+			<!-- OCCURS format -->
+			<path>\p{Space}*(\S++\s++){5}.*</path>
 			
-			<text></text>
+			<text>;
+			public static String 1Pattern = X</text> 
+			<path>\p{Space}*(\S++\s++){4}.*</path>
+			
+			
 	</CCC05>
 	<CCC07>
 	<text>+1Pattern</text><path></path></CCC07>
-	
+	<MV>
+	<text>
+	public static String </text>
+	<path>\p{Space}*(\S++\s++){2}.*</path>
+	<text> = X</text>
+	<path>\p{Space}*(\S++\s++){4}.*</path>
+	<text>;</text>
+	</MV>
+	<REC><text>1</text></REC>
+	<BACK><text>
+	1 =></text></BACK>
+	<OCCURS>
+	<text>[</text>
+	<path>\p{Space}*(\S++\s++){6}.*</path>
+	<text>]</text>
+	</OCCURS>
   	<PIC>
   	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(XX)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
  	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
   	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
+  		
   			
   	</PIC>
-  	
+  	<PIC_bkup>
+  		
+  	</PIC_bkup>
   	<XX>
 		<text>
 		String 1;</text>  	
