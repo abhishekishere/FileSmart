@@ -4,9 +4,10 @@ import java.util.HashSet;
 
 public class CobolStatement extends Thread {
 
-	String name1;
 	Thread parent;
-
+	String text;
+	String fullLine;
+	int dent;
 	public String getLine() {
 		return line;
 	}
@@ -16,7 +17,7 @@ public class CobolStatement extends Thread {
 	}
 
 	String line;
-	
+
 	HashSet<CobolTag> hierarchy;
 
 	public CobolStatement() {
@@ -24,9 +25,9 @@ public class CobolStatement extends Thread {
 		hierarchy = new HashSet<CobolTag>();
 	}
 
-	public CobolStatement(CobolTag cobolTag, String name, String line, Thread parent ) {
+	public CobolStatement(CobolTag cobolTag, String line) {
 		super(cobolTag);
-		this.name1 = name;
+
 		this.line = line;
 		this.parent = parent;
 
@@ -40,22 +41,11 @@ public class CobolStatement extends Thread {
 		this.parent = parent;
 	}
 
-	public String getName1() {
-		return name1;
-	}
-
-	public void setName1(String name1) {
-		this.name1 = name1;
-	}
-
 	public void addTag(CobolTag obj) {
 		hierarchy.add(obj);
 	}
 
-	public void removeTag(CobolTag obj) {
-		System.out.println(obj.text);
-		hierarchy.remove(obj);
-	}
+	
 
 	public static void main(String[] args) {
 

@@ -1,337 +1,383 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE cobol SYSTEM "Cobol2Java.dtd" >
 <cobol>
-	<IDENTIFICATION>
-		<text>
-		/*		------------------------------------------- 
-		 *			IDENTIFICATION DIVISION
-		 *		-------------------------------------------
-		 */</text>
-	</IDENTIFICATION>
-	<PROGRAM-ID>
-		<text>
-	 public class </text>
-		<text></text>
-		<text> { </text>
-		// Insert text here<text>
-		}</text>
-	</PROGRAM-ID>
-	
-	<AUTHOR>
-		<text>
-		String author = "</text>
-		<text></text>
-		<text>" ;</text>
-	</AUTHOR>
-	<INSTALLATION>
-		<text>
-		String installation = "</text>
-		<text></text>
-		<text>";</text>
-	</INSTALLATION>
-	<ENVIRONMENT>
-		<text>
-		/*		------------------------------------------ 
-		 *			ENVIRONMENT DIVISION
-		 *		------------------------------------------
-		 */</text>
-	</ENVIRONMENT>
-	<CONFIGURATION>
-		<text>
-					/* Configuration Section */
-		</text>		
-	</CONFIGURATION>
-	<SOURCE-COMPUTER>
-		<text>
-			String source_computer = </text>
-		<text></text>
-		<text>;</text>
-	</SOURCE-COMPUTER>
-	<OBJECT-COMPUTER>
-		<text>
-			String object_computer = </text>
-		<text></text>
-		<text>;</text>
-	</OBJECT-COMPUTER>
-	<INPUT-OUTPUT>
-		<text>
-			
-					/* input-output section */
-		</text>
-	</INPUT-OUTPUT>
-	<FILE-CONTROL>
-		<text>
-		//	File Control</text>
-	</FILE-CONTROL>
-	
-	
-	<SELECT>
-		<text>
-		File 1</text>
-		<path>[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+(ASSIGN)\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
-	</SELECT>
-	<ASSIGN>
-		<text>;</text>
-	</ASSIGN>
-	<DATA>
-		<text>
-		/*		---------------------------------- 
-		 *			DATA DIVISION
-		 *		----------------------------------
-		 */</text>
-	</DATA>
-	
-	<FILE>
-		<text>
-					/* File Section */</text>
-	</FILE>
-	<C01>
-		<text>
-			public static String 1;</text>
-			<text>
-			public static String 1Pattern = </text> 
-			<path>\s*[0-9.]+\s*\s+\s*[A-Za-z0-9-",/()@#:*=.]+\s*\s+(\s*[A-Za-z0-9-",/()@#:*=.]+\s*)\s+[\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+</path>
-			
-			<text></text>
-	</C01>
-	<C03>
-	<text>+1Pattern</text><path></path></C03>
-	<CC03>
-		<text>
-			public static String 1;</text>
-			<text>
-			public static String 1Pattern = </text> 
-			<path>\s*[0-9.]+\s*\s+\s*[A-Za-z0-9-",/()@#:*=.]+\s*\s+(\s*[A-Za-z0-9-",/()@#:*=.]+\s*)\s+[\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+</path>
-			
-			<text></text>
-	</CC03>
-	<CC05>
-	<text>+1Pattern</text><path></path></CC05>
-	<CCC05>
-		
-			<!-- FILLER format -->
-			<path>\p{Space}*(\S++\s++){2}.*</path>
-			<!-- OCCURS format -->
-			<path>\p{Space}*(\S++\s++){5}.*</path>
-			
-			<text>;
-			public static String 1Pattern = X</text> 
-			<path>\p{Space}*(\S++\s++){4}.*</path>
-			
-			
-	</CCC05>
-	<CCC07>
-	<text>+1Pattern</text><path></path></CCC07>
-	<MV>
-	<text>
-	public static String </text>
-	<path>\p{Space}*(\S++\s++){2}.*</path>
-	<text> = X</text>
-	<path>\p{Space}*(\S++\s++){4}.*</path>
-	<text>;</text>
-	</MV>
-	<REC><text>1</text></REC>
-	<BACK><text>
-	1 =></text></BACK>
-	<OCCURS>
-	<text>[</text>
-	<path>\p{Space}*(\S++\s++){6}.*</path>
-	<text>]</text>
-	</OCCURS>
-  	<PIC>
-  	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(XX)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
- 	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
-  	<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(X)[\s*[A-Za-z0-9-",/()@#:]+\s*]+\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
-  		
-  			
-  	</PIC>
-  	<PIC_bkup>
-  		
-  	</PIC_bkup>
-  	<XX>
-		<text>
-		String 1;</text>  	
-  	</XX>
-  	<X>	<text>(\\w+</text>
-  		<path>\s*[0-9.]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*X\((\s*[0-9.]+\s*)\)</path>
-  		<text>) ;</text>
-  		 
-  	</X>
-  	<C9>
-  		<text>int 1</text>
-  		<path>.*([(].*[)]).*</path>
-  		<path>.*(VALUE).*</path>
-  		<text>;</text>
-  		
-  	</C9>
-  	<VALUE>
-  		<text>=</text>
-  		<path>.*VALUE(.*)</path>
-  		
-  	</VALUE>
-  	<C05>
-  		<path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(PIC)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
-  		<path>\s*[0-9.]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*(\s*[A-Za-z0-9-",/()@#:*=]+\s*)X\(\s*[0-9.]+\s*\)\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
-  		<path></path>
-  	</C05>
-  	<WORKING-STORAGE>
-  		<text>
-  		** Working Storage Section</text>
-  		
-  	</WORKING-STORAGE>
-  	<VALUE></VALUE>
-	<PROCEDURE>
-	<text>
-		/*		------------------------------------- 
-		 *			PROCEDURE DIVISION
-		 *		-------------------------------------
-		 */</text>
-		<text>
-		public static void main(String args[]) { </text>
-		<text>
-		int block=START-CODE;</text>
-		<text>
-		do {
-		</text>
-		<text>
-			switch (block) {
-			</text>
-		<path></path>
-		<text>
-			}</text>
-		<text>
-		} while (block != null);</text>
-		<text>
-		}</text>
-	</PROCEDURE>	
-	<COPY>
-  		<text>
-  		/* </text>
-  		<path>([\s*[A-Za-z0-9-",/()@#:*=]+\s*]+)</path>
-  		<text>\
-  		 */</text>
-  		 <path></path>
-  	</COPY>
-  	<OPEN>
-  		<path>\s*[A-Za-z0-9-",/()@#:*=.]+\s*\s+(\s*[A-Za-z0-9-",/()@#:*=.]+\s*)\s+[\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+</path>
-  		
-  		<path></path>
-  	</OPEN>
-  	<INPUT><text>
-  		Scanner 2Scanner ;</text>
- 		<text>
- 		2Scanner = new Scanner(new BufferedReader(2Reader));</text></INPUT>
- 		<SHARED><text>
-  		Scanner 2Scanner ;</text>
- 		<text>
- 		2Scanner = new Scanner(new BufferedReader(2Reader));</text></SHARED>
- 		<OUTPUT><text>
-  		CharArrayWriter 2Writer ;</text>
- 		<text>
- 		2Writer = new CharArrayWriter(new BufferedReader(2Reader));</text>
- 		</OUTPUT>
-  	<MOVE>
-  		<text>
-  		3 = 1;
-  		</text>
-  		<path></path>
-  	</MOVE>
-  	<COMPUTE>
-  		<path>\s*[A-Za-z0-9-",/()@#:*=.]+\s*([\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+)</path>
-  		<text>;</text>
-  		<path></path>
-  	</COMPUTE>
-  	<PERFORM>
- 	<text>
-  	public static final int </text>
-  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[0-9.]+-([A-Za-z0-9-",/()@#:*=]+)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
-  	<text> = </text>
-  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*([0-9.]+)-[A-Za-z0-9-",/()@#:*=]+[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
-  	<text>;</text>
-  	<text>
-  	block = </text>
-  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[0-9.]+-([A-Za-z0-9-",/()@#:*=]+)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
-  	<text> ; 
-  	continue ;
-  	</text>
-  	<path></path>
-  	</PERFORM>
-  	<GO>
-  	<text>
-  	continue </text>
-  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*[=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+GO TO\s*[0-9.]+\s*-(\s*[A-Za-z0-9-",/()@#:*=]+\s*)</path>
-  	<path>[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+GO TO\s*[0-9.]+\s*-(\s*[A-Za-z0-9-",/()@#:*=]+\s*)</path>
-  	<text> ;</text>
-  	<path></path>
-  	</GO>
-  	<ASSIGN></ASSIGN>
-  	<PROGRAM-ID></PROGRAM-ID>
-  	<VALUE>
-  		<text></text>
-  	</VALUE>
-  	<FD>
-  	<text>
-  	1 = new File("</text>
-  	<path>[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+LIBRARY\s*[A-Za-z0-9-",/()@#:*=]+\s*"([A-Za-z0-9-",/()@#:*=]+)\s*"[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
-  	<text>\\1");</text>
-  	</FD>
-  	<FILENAME>
-  		<text>= new CharArrayReader(1);</text>
-  	</FILENAME>
-  	<RECORD>
-  	</RECORD>
-  	<LABEL></LABEL>
-  	<VALUE>
-  		<path></path>
-  	</VALUE>
-  	<FILENAME>
-  		<text>try {
-			FileReader fr2 = new FileReader("</text>
-		<text>");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace(2);
-		}</text>
-  	</FILENAME>
-  	<CLOSE>
-  	<text>
-  	close file</text>
-  	<path></path>
-  	</CLOSE>
-  	<STOP>
-  	<text>
-  	block = null;
-  	continue;</text>
-  	<path></path></STOP>
-  	<READ>
-  	<text>
-  		1</text>
-  		<text>Reader.read();</text>
-  	</READ>
-  	<WRITE>
-  		<text>
-  		1Writer.write(1);</text>
-  	</WRITE>
-  	<IF>
-  	<text>if(</text>
-  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*(\s*[A-Za-z0-9-",/()@#:*=]+\s*[=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
-  	<text>) {
-  	</text>
-  	<path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*[=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*(GO)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
-  	
-  	<text>
-  	}</text>
-  	<path></path>
-  	</IF>
-  	<EXIT>
-  	<text>
-  	block = null;
-  	continue;</text>
-  	<path></path>
-  	</EXIT>
-  	<LIBRARY>
-  	
-  	</LIBRARY>
-  	<VOLUME></VOLUME>
-  	<SPACE></SPACE>
-  	<CMEDIT></CMEDIT>
+  <c2j>
+    <path>\p{Space}*((?:IDENTIFICATION)|(?:PROGRAM-ID)|(?:PROCEDURE))(?s:.*)</path>
+    <text>
+    public static String </text>
+    <path>\p{Space}*(?:[0-9]{2}\p{Space}+(?:(?:FILLER)|(?:ROW)|(?:[0-9])|([^\p{Space}]+)))*(?s:.*)</path>
+    <text>;</text>
+    <!--<path>\p{Space}+.*(PIC).*\p{Space}*</path>-->
+     
+  </c2j>
+  <IDENTIFICATION>
+    <text>
+      package oata;
+      /*	-------------------------------------------
+      *			IDENTIFICATION DIVISION
+      *		-------------------------------------------
+      */
+      import java.util.*;
+      import java.io.*;
+
+      public class
+    </text>
+    <path></path>
+  </IDENTIFICATION>
+  <PROCEDURE>
+    <text>
+      /*		-------------------------------------
+      *			PROCEDURE DIVISION
+      *		-------------------------------------
+      */
+      public static void main(String args[]) {
+      int block=START-CODE;
+      do {
+      switch (block) {
+      	case START_CODE :
+    </text>
+  </PROCEDURE>
+  <PROGRAM-ID>
+    <text></text>
+    <text> {
+      private static final String YX = null;
+      private static final String YXXX = null;
+      private static final String YXX = null;
+      private static final String Y99 = null;
+      private static final String Y9 = null;
+      private static final String FILLER = null;
+      private static final int START_CODE = 9999;
+      private static final int FINISH = 99998;
+      private static String Y9(int i) {
+      return null;
+      }
+      private static String YX(int i) {
+      return null;
+      }
+     </text>
+  </PROGRAM-ID>
+  <ENVIRONMENT>
+    <text>
+      /*	------------------------------------------
+      *			ENVIRONMENT DIVISION
+      *		------------------------------------------
+      */
+    </text>
+  </ENVIRONMENT>
+  <CONFIGURATION>
+    <text>
+      /* Configuration Section */
+    </text>
+  </CONFIGURATION>
+  <FILLER></FILLER>
+  <INPUT-OUTPUT>
+    <text>
+
+      /* input-output section */
+    </text>
+  </INPUT-OUTPUT>
+  <FILE-CONTROL>
+    <text>
+      //	File Control
+    </text>
+  </FILE-CONTROL>
+  <SELECT>
+    <text>
+      File 1;
+    </text>
+  </SELECT>
+  <ASSIGN>
+    <text>;</text>
+  </ASSIGN>
+  <DATA>
+    <text>
+      /*		----------------------------------
+      *			DATA DIVISION
+      *		----------------------------------
+      */
+    </text>
+  </DATA>
+  <FILE>
+    <text>
+      /* File Section */
+    </text>
+  </FILE>
+  <PARAGRAPH>
+    <text>
+      case
+    </text>
+    <path>\p{Space}*\p{Digit}*-*([\p{Alnum}-\p{Digit}]+)\p{Space}*</path>
+    <text> :</text>
+    <text>
+      public static final int
+    </text>
+    <path>\p{Space}*\p{Digit}*-*([\p{Alnum}-\p{Digit}]+)\p{Space}*</path>
+    <text> = </text>
+    <path>\p{Space}*(\p{Digit}*)-*[\p{Alnum}-\p{Digit}]+\p{Space}*</path>
+    <text>;</text>
+  </PARAGRAPH>
+  <MV>
+    <text>
+      public static String
+    </text>
+    <path>\p{Space}*(\S++\s++){2}.*</path>
+    <text>;</text>
+    <text>
+      public static String
+    </text>
+    <path>\p{Space}*(\S++\s++){2}.*</path>
+    <text>Pattern = Y</text>
+    <path>\p{Space}*(\S++\s++){4}.*</path>
+    <text>;</text>
+
+  </MV>
+  <DECLARATIVES></DECLARATIVES>
+  <REC>
+    <text>String 1 = </text>
+  </REC>
+  <BACK>
+    <text>;</text>
+  </BACK>
+  <SAME>
+    <text>+1</text>
+  </SAME>
+  
+  <PIC>
+    <text>public static String </text>
+    <!-- Getting the name of the memory variable. Every PIC sentence matches this exp but if it doesn't 
+    find a group it terminates the thread-->
+    <path>\p{Space}*\p{Digit}{2}\p{Space}+(?:FILLER|([^\p{Space}0-9]\S*)|[0-9]\S+).*\p{Space}*.*\p{Space}*</path>
+    <text>;
+    </text>
+  </PIC>
+  <OCCURS>
+    <text>[] </text>
+    <path>\p{Space}*\p{Digit}{2}\p{Space}+(?:FILLER|([^\p{Space}0-9]\S*))\p{Space}+(OCCURS)\p{Space}+([0-9]+)\p{Space}+(PIC).*\p{Space}*</path> 
+  </OCCURS>
+  <TIMES>
+    <text>[] </text>
+    <path>\p{Space}*\p{Digit}{2}\p{Space}+(?:FILLER|([^\p{Space}0-9]\S*))\p{Space}+(?:PIC).*\p{Space}+(?:OCCURS)\p{Space}+(?:[0-9]+)\p{Space}*(TIMES)\p{Space}*</path>    
+  </TIMES>
+  <MWSV>
+    <text>
+    </text>
+    <path>\p{Space}*.*(PIC).*\p{Space}*</path>
+    <path>\p{Space}*.*(MOVE).*\p{Space}*</path>
+  </MWSV>
+  <C9>
+    <text>int 1</text>
+    <path>.*([(].*[)]).*</path>
+    <path>.*(VALUE).*</path>
+    <text>;</text>
+
+  </C9>
+  <VALUE>
+    <text>=</text>
+    <path>.*VALUE(.*)</path>
+
+  </VALUE>
+  <C05>
+    <path>[\s*[A-Za-z0-9-",/()@#:]+\s*]+(PIC)[\s*[A-Za-z0-9-",/()@#:]+\s*]+</path>
+    <path>\s*[0-9.]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*(\s*[A-Za-z0-9-",/()@#:*=]+\s*)X\(\s*[0-9.]+\s*\)\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[0-9.]+\s*</path>
+    <path></path>
+  </C05>
+  <WORKING-STORAGE>
+    <text>
+      /* Working Storage Section
+    </text>
+
+  </WORKING-STORAGE>
+  <VALUE></VALUE>
+  <COPY>
+    <text>
+      /*
+    </text>
+    <path>([\s*[A-Za-z0-9-",/()@#:*=]+\s*]+)</path>
+    <text>
+      \
+      */
+    </text>
+
+  </COPY>
+  <OPEN>
+    <path>(\\S++\\s++){2}</path>
+  </OPEN>
+  <I-O>
+    <text>
+      System.out.println();
+    </text>
+  </I-O>
+  <CALL>
+    <text>
+      Runtime.getRuntime().exec(
+    </text>
+    <text>1, 3=4</text>
+    <text>);</text>
+  </CALL>
+  <INPUT>
+    <text>
+      Scanner 2Scanner ;
+    </text>
+    <text>
+      2Scanner = new Scanner(new BufferedReader(2Reader));
+    </text>
+  </INPUT>
+  <SHARED>
+    <text>
+      Scanner 2Scanner ;
+    </text>
+    <text>
+      2Scanner = new Scanner(new BufferedReader(2Reader));
+    </text>
+  </SHARED>
+  <OUTPUT>
+    <text>
+      CharArrayWriter 2Writer ;
+    </text>
+    <text>
+      2Writer = new CharArrayWriter(new BufferedReader(2Reader));
+    </text>
+  </OUTPUT>
+  <MOVE>
+  <text>
+  </text>
+    <path>\p{Space}*MOVE.* TO (.*)</path>
+    <text>=</text>
+    <path>\p{Space}*MOVE(.*) TO .*</path>
+    <text>;
+    </text>
+  </MOVE>
+  <COMPUTE>
+    <path>\s*[A-Za-z0-9-",/()@#:*=.]+\s*([\s*[A-Za-z0-9-",/()@#:*=.]+\s*]+)</path>
+    <text>;</text>
+
+  </COMPUTE>
+  <PERFORM>
+    <text>
+      public static final int
+    </text>
+    <path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[0-9.]+-([A-Za-z0-9-",/()@#:*=]+)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+    <text> = </text>
+    <path>\s*[A-Za-z0-9-",/()@#:*=]+\s*([0-9.]+)-[A-Za-z0-9-",/()@#:*=]+[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+    <text>;</text>
+    <text>
+      block =
+    </text>
+    <path>\s*[A-Za-z0-9-",/()@#:*=]+\s*[0-9.]+-([A-Za-z0-9-",/()@#:*=]+)[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+    <text>
+      ;
+      continue ;
+    </text>
+
+  </PERFORM>
+  <ADD>
+    <text>
+      3 = 3 + 1;
+    </text>
+  </ADD>
+  <GO>
+    <text>
+      continue
+    </text>
+    <path>\s*[A-Za-z0-9-",/()@#:*=]+\s*\s*[A-Za-z0-9-",/()@#:*=]+\s*[=]+\s*[A-Za-z0-9-",/()@#:*=]+\s*[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+GO TO\s*[0-9.]+\s*-(\s*[A-Za-z0-9-",/()@#:*=]+\s*)</path>
+    <path>[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+GO TO\s*[0-9.]+\s*-(\s*[A-Za-z0-9-",/()@#:*=]+\s*)</path>
+    <text> ;</text>
+
+  </GO>
+  <VALUE>
+
+  </VALUE>
+  <FD>
+    <text>
+      1 = new File("
+    </text>
+    <path>[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+LIBRARY\s*[A-Za-z0-9-",/()@#:*=]+\s*"([A-Za-z0-9-",/()@#:*=]+)\s*"[\s*[A-Za-z0-9-",/()@#:*=]+\s*]+</path>
+    <text>\\1");</text>
+  </FD>
+  <FILENAME>
+    <text>= new CharArrayReader(1);</text>
+  </FILENAME>
+  <RECORD>
+  </RECORD>
+  <LABEL></LABEL>
+  <FILENAME>
+    <text>
+      try {
+      FileReader fr2 = new FileReader("
+    </text>
+    <text>
+      ");
+      } catch (FileNotFoundException e) {
+      e.printStackTrace(2);
+      }
+    </text>
+  </FILENAME>
+  <CLOSE>
+    <text>
+      1.close();
+    </text>
+
+  </CLOSE>
+  <STOP>
+    <text>
+      block = null;
+      continue;
+    </text>
+  </STOP>
+  <READ>
+    <text>
+      1
+    </text>
+    <text>Reader.read();</text>
+  </READ>
+  <WRITE>
+    <text>
+      1Writer.write(1);
+    </text>
+  </WRITE>
+  <IF>
+    <text>
+      if(
+    </text>
+    <text>1</text>
+    <text>==</text>
+    <text>3</text>
+
+
+    <text>
+      ) {
+    </text>
+    <text>}</text>
+
+  </IF>
+  <ELSE>
+    else {}
+  </ELSE>
+  <OR>
+    <text>||</text>
+    <text>1</text>
+    <text>==</text>
+    <path>\p{Space}.*OR\p{Space}("+SET+"{1}).*</path>
+
+  </OR>
+  <EXIT>
+    <text>
+      block = null;
+      continue;
+    </text>
+
+  </EXIT>
+  <LIBRARY>
+
+  </LIBRARY>
+  <VOLUME></VOLUME>
+  <SPACE></SPACE>
+  <CMEDIT></CMEDIT>
+  <AND>
+    <text>&amp;&amp;</text>
+  </AND>
+  <NOT>
+    <text>!</text>
+    <path>NOT((.)*)</path>
+  </NOT>
 </cobol>
