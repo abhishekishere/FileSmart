@@ -31,7 +31,7 @@ public class CobolTag implements Runnable {
 		CobolStatement ss9 = (CobolStatement) Thread.currentThread();
 		String name = ss9.getLine();
 		String fullLine = ss9.fullLine;
-
+		log(name,fullLine,1);
 		// String name = tight2looseMatching(currLine);
 		ss9.text = "";
 		command = doc.getElementsByTagName(name.trim()).item(0);
@@ -53,7 +53,10 @@ public class CobolTag implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if(type.getNodeName() == "path") break;
+					if(type.getNodeName() == "path") {
+						logUpdate(name,fullLine,1);
+						break;
+					}
 					if(type.getNodeName() == "text")continue;
 				}
 				if (type.getNodeName() == "path") {
@@ -62,7 +65,10 @@ public class CobolTag implements Runnable {
 						path = match(value, ss9.fullLine);
 					} catch (InvalidPathException e1) {
 						// TODO value match the line but doesn't return the group
+						System.out.println(e1.line);
+						System.out.println(e1.pattern);
 						ss9.text = "\n/*"+ss9.fullLine+"*/";
+						logUpdate(name,fullLine,0);
 						break;
 					}
 					if (path != null) {
@@ -81,21 +87,18 @@ public class CobolTag implements Runnable {
 				}
 				if (type.getNodeName() == "text") {
 					ss9.text = ss9.text + slowWrite(value);
-//					tagText = tagText + ss9.text;
-//					ss9.text = "";
-					
+				
 				}
+			// end of for loop	
 			} 
 		} else {
 			/*
 			 * command == null
 			 */
 			ss9.text = ss9.text + slowWriteAsItIs(name);
-			// CobolStatement ss8 = (CobolStatement) Thread.currentThread();
-			//tagText = tagText + name;
-			// ss8.text = "";
+			
 		}
+		
 		tagText = tagText + ss9.text;
 	}
-	// System.out.println(ss9.text+"\n<-------");
 }

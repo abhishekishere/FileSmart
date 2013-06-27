@@ -141,7 +141,8 @@ public class Translator {
 //	}
 
 	public static String tight2looseMatching(String line) {
-		return "c2j";
+//	try {
+			return "c2j";
 //		String name = null;
 //		/* Get All the memory variables */
 //		if (name != null)
@@ -156,13 +157,11 @@ public class Translator {
 //					name = null;
 //			}
 //		}
-//		
 //		/* checking for commands defined in xml */
 //		if (name != null)
 //			return name.trim();
 //		name = match(SPACE + "(" + PROCEDURE_COMMANDS + "|"
 //				+ IDENTIFICATION_COMMANDS + ")" + SENTENCE, line);
-//
 //		/* Paragraphs starting */
 //		if (name != null)
 //			return name.trim();
@@ -176,17 +175,20 @@ public class Translator {
 //			}
 //			name = "PARAGRAPH";
 //		}
-//
 //		/* search for tag */
 //		if (name != null)
 //			return name.trim();
 //		String[] line0 = line.split("\\p{Space}");
-//		for(int i = 0 ;  i< line0.length ; i++) {
-//		command =  doc.getElementsByTagName(line0[0]).item(0);
-//		if (command != null) {
-//			return line0[i];
+//		for (int i = 0; i < line0.length; i++) {
+//			command = doc.getElementsByTagName(line0[0]).item(0);
+//			if (command != null) {
+//				return line0[i];
+//			}
 //		}
-//		}
+//	} catch (InvalidPathException e) {
+//		// TODO: handle exception
+//		System.out.println("Invalid Path Exception:"+e.pattern);
+//	}
 //		return null;
 	}
 
@@ -198,7 +200,7 @@ public class Translator {
 			try {
 			result = m.group(1).trim();
 			} catch(NullPointerException e) {
-				throw new InvalidPathException();
+				throw new InvalidPathException(pattern,line);
 			} 
 		} else {
 			result = null;
@@ -232,7 +234,44 @@ public class Translator {
 		//ss9.text = ss9.text + text;
 		return text;
 	}
+public static void  log(String name,String line, int handled) {
+	line = line.replaceAll("'","''");
+	String queryString = null;
+		try {
+			Class.forName( "net.sourceforge.jtds.jdbc.Driver" );
+		
+		java.sql.Connection con = java.sql.DriverManager.getConnection( "jdbc:jtds:sqlserver://10.1.1.203:1433/abhishek;instance=SQLEXPRESS", "sa", "outline@123" );
+		java.sql.Statement stmt = con.createStatement();
 
+		          queryString = "insert into cobol2java values ('"+name+"', '"+line+"', "+handled+") ";
+		          stmt.executeUpdate(queryString);
+		        
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(queryString);
+			e.printStackTrace();
+		}   
+
+}
+public static void  logUpdate(String name,String line, int handled) {
+	line = line.replaceAll("'","''");
+	String queryString = null;
+		try {
+			Class.forName( "net.sourceforge.jtds.jdbc.Driver" );
+		
+		java.sql.Connection con = java.sql.DriverManager.getConnection( "jdbc:jtds:sqlserver://10.1.1.203:1433/abhishek;instance=SQLEXPRESS", "sa", "outline@123" );
+		java.sql.Statement stmt = con.createStatement();
+
+		          queryString = "update cobol2java set handled="+handled+" where name= '"+name+"' AND line= '"+line+"'";
+		          stmt.executeUpdate(queryString);
+		        
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(queryString);
+			e.printStackTrace();
+		}   
+
+}
 	public static void main(String[] args) {
 		String line = "AND NOT = \"R\" ";
 		

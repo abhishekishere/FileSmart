@@ -19,6 +19,8 @@ public class FileSmartMavenMain extends Translator {
 	/**
 	 * @param args
 	 */
+	int i;
+	int j;
 	static Scanner s;
 	Translator tt;
 	String line; // full cobol statement
@@ -56,10 +58,11 @@ public class FileSmartMavenMain extends Translator {
 		try {
 
 			String line;
-			int i = 0;
+			 i = 0;
+			 j=0;
 			method = tt.getClass().getMethod(method1, new String().getClass());
 
-			for (line = this.readLine(); line != null; line = this.readLine()) {
+			for (line = FileSmartMavenMain.readLine(); line != null; line = this.readLine()) {
 				i = i + 1;
 				line = line + " ";
 				line = line.replaceAll(GARBAGE, "");
@@ -83,6 +86,7 @@ public class FileSmartMavenMain extends Translator {
 						e.printStackTrace();
 					}
 				} else {
+					j = j+1;
 					if (includeComments == true) {
 						shared.tagText = shared.tagText + "\n/* " + line + "*/";
 					}
@@ -93,6 +97,7 @@ public class FileSmartMavenMain extends Translator {
 			shared.tagText = shared.tagText.replaceAll("\\([0]+([1-9]?[0-9]*)",
 					"(\\1");
 			shared.tagText = shared.tagText.replaceAll("(public\\sstatic\\sString ){2}","public static String ");
+			//shared.tagText = shared.tagText.replaceAll("(\\p{Space}*([*]).*)", "\\1");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,22 +135,23 @@ public class FileSmartMavenMain extends Translator {
 		// elem.setTextContent("");
 		//	
 		FileSmartMavenMain smartFile = new FileSmartMavenMain(
-		 "C:\\Users\\abhishekba\\" + fileName + ".dat", "\\.");
-			//	files[0], "\\.");
+		// "C:\\Users\\abhishekba\\" + fileName + ".dat", "\\.");
+				files[0], "\\.");
 		String fullProg = smartFile.processFile(true, "tight2looseMatching");
 //		fullProg = fullProg.replace("public static void main", dependence
 //				+ "\npublic static void main");
 		
 		try {
 			PrintWriter writer = new PrintWriter(new File(
-			 "C:\\Users\\abhishekba\\git\\FileSmart\\src\\oata\\" + fileName + ".java"));
-			//		files[0] + ".java"));
+			// "C:\\Users\\abhishekba\\git\\FileSmart\\src\\oata\\" + fileName + ".java"));
+					files[0] + ".java"));
 			writer.print(fullProg + "\n\t\t\t}"
 					+ "\n\t\t} while (block != FINISH);" + "\n\t\t}\n}");
 			writer.flush();
 			writer.close();
-			System.out.print(fullProg + "\n\t\t\t}"
-					+ "\n\t\t} while (block != FINISH);" + "\n\t\t}\n}");
+			System.out.println(smartFile.j+" out of "+ smartFile.i +" are not getting converted" );
+			//System.out.print(fullProg + "\n\t\t\t}"
+			//		+ "\n\t\t} while (block != FINISH);" + "\n\t\t}\n}");
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
