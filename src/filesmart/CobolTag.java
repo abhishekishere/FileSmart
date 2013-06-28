@@ -67,7 +67,7 @@ public class CobolTag implements Runnable {
 						// TODO value match the line but doesn't return the group
 						System.out.println(e1.line);
 						System.out.println(e1.pattern);
-						ss9.text = "\n/*"+ss9.fullLine+"*/";
+						ss9.text = "/*"+ss9.fullLine+"*/\n";
 						logUpdate(name,fullLine,0);
 						break;
 					}
@@ -82,6 +82,7 @@ public class CobolTag implements Runnable {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
+						
 					} else
 						continue;
 				}
